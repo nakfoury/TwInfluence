@@ -1,20 +1,35 @@
 var express = require('express');
 var router = express.Router();
+var Twit = require('twit');
 
 /* Put OAuth stuff here */
-//blahblah
+var T = new Twit({
+    consumer_key: 'luzRJQdzj4g0L7mjTZRDpo0PO',
+    consumer_secret: 'ABYUGC4a5qA5NCaV6VH5zO3Y3u9RhdGU5IeNiEHdXmz4fdWS34',
+    access_token: '392365525-X2Dh0aOkfp1EQt2R9o2bX17PkW60lmxVKEyTdr22',
+    access_token_secret: 'fFWofKgtDPybsipGkwFSiZWqFb0pVYE59qr6TbLiBhHFY',
+    //callback: '52.24.28.184:3000/index.html'
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    //
-    // res.render('fubar', { title: 'Zombo.com' });
-    res.send('TwInfluence');
+    //res.render('fubar', { title: 'Zombo.com' });
+    //res.send('TwInfluence');
 });
 
+//router.post('/button', function(req, res) {
+//    data = req.body;
+//
+//}
+
+
 router.get('nomatter', function(req, res, next) {
-    var query = 'aaaaa'; //it'll come from the req
+    var query = 'banana'; //it'll come from the req
     var result = {};
-    //use twitter to update result
+    T.get('search/tweets', {q: query, count: 100}, function(err, data, response) {
+        console.log(data);
+        result = data;
+    });
     res.json(result);
 });
 
