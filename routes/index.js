@@ -21,7 +21,7 @@ router.post('/hashtag', function(req, res) {
     console.log(req.body);
     var query = req.body['querytext'];
     var result = {};
-    T.get('search/tweets', {q: query, count: 100}, function(err, data, response) {
+    T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function(err, data, response) {
         console.log(data);
         result = data;
         res.json(result);
