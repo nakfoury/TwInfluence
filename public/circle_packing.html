@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--code adapted from http://bl.ocks.org/seliopou/4127259-->
+<html>
+  <head>
+    <title>d3.js example | circle packing in a rectangle</title>
+    <script src="http://d3js.org/d3.v2.js"></script>
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <div id="canvas"></div>
+    <script type="text/javascript">
+    var w = 640,
+        h = 480;
+
+    var data = {
+      name : "root",
+      children : [
+        { name: '1', size: 100 },
+        { name: '2', size: 85 },
+        { name: '3', size: 70 },
+        { name: '4', size: 55 },
+        { name: '5', size: 40 },
+        { name: '6', size: 25 },
+        { name: '7', size: 10 },
+      ]
+    }
+
+    var canvas = d3.select("#canvas")
+      .append("svg:svg")
+      .attr('width', w)
+      .attr('height', h);
+
+    var nodes = d3.layout.pack()
+      .value(function(d) { return d.size; })
+      .size([w, h])
+      .nodes(data);
+    
+    // Get rid of root node
+    nodes.shift();
+
+    canvas.selectAll('circles')
+        .data(nodes)
+      .enter().append('svg:circle')
+        .attr('cx', function(d) { return d.x; })
+        .attr('cy', function(d) { return d.y; })
+        .attr('r', function(d) { return d.r; })
+        .attr('fill', 'white')
+        .attr('stroke', 'grey');
+    </script>
+  </body>
+</html>
