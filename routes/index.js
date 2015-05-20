@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Twit = require('twit');
-var cheerio = require('cheerio');
+var fs = require('fs');
 
 /* Put OAuth stuff here */
 var T = new Twit({
@@ -21,15 +21,30 @@ var T = new Twit({
 router.post('/result', function(req, res) {
     console.log(req.body);
     var query = req.body['querytext'];
-    var result = {};
+    var result = { "name": "tweets", "children": [] };
     T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function(err, data, response) {
         tweets = data.statuses;
         //console.log(tweets);
         for (var i = 0; i < tweets.length; i++) {
             //console.log(tweets[i].text);
-            result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweeters": []};
+            //result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweeters": []};
+            result.children[i] = { "name": tweets[i].user.name, "children": []};
+
+            T.get('statuses/retweeters/ids', {id: tweets[i].id, stringify_ids: true}, function(err, data, response) {
+                rtids = data.ids;
+                //console.log(data);
+                //console.log("test");
+                //console.log(rtids);
+                for (var j = 1; j < 4; j++) {
+                    //console.log("test");
+                    //console.log(result);
+                    result.children[j].children[j] = { "name": rtids[j], "size": tweets[i].retweet_count/j };
+                }
+            });
+
         }
-        console.log(result);
+        //console.log(result);
+        fs.writeFile('public/twitter_data2.json', JSON.stringify(result));
     });
     res.redirect('/result.html');
 });
