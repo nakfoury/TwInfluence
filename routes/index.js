@@ -30,17 +30,17 @@ router.post('/result', function(req, res) {
             //result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweeters": []};
             result.children[i] = { "name": tweets[i].user.name, "children": []};
 
-            T.get('statuses/retweeters/ids', {id: tweets[i].id, stringify_ids: true}, function(err, data, response) {
-                rtids = data.ids;
-                //console.log(data);
-                //console.log("test");
-                //console.log(rtids);
-                for (var j = 1; j < 4; j++) {
-                    //console.log("test");
-                    //console.log(result);
-                    result.children[j].children[j] = { "name": rtids[j], "size": tweets[i].retweet_count/j };
-                }
-            });
+            //T.get('statuses/retweeters/ids', {id: tweets[i].id, stringify_ids: true}, function(err, data, response) {
+            //    rtids = data.ids;
+            //    //console.log(data);
+            //    //console.log("test");
+            //    //console.log(rtids);
+            //    for (var j = 1; j < 4; j++) {
+            //        //console.log("test");
+            //        //console.log(result);
+            //        result.children[j].children[j] = { "name": rtids[j], "size": tweets[i].retweet_count/j };
+            //    }
+            //});
 
         }
         //console.log(result);
