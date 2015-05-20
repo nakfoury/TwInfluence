@@ -103,7 +103,7 @@
           .append("g")
             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-        d3.json("flare.json", function(error, root) {
+        d3.json("twitter_data.json", function(error, root) {
           if (error) return console.error(error);
 
           var focus = root,

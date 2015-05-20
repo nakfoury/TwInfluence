@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Twit = require('twit');
+var cheerio = require('cheerio');
 
 /* Put OAuth stuff here */
 var T = new Twit({
@@ -11,26 +12,26 @@ var T = new Twit({
     //callback: '52.24.28.184:3000/index.html'
 });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    //res.render('fubar', { title: 'Zombo.com' });
-    //res.send('TwInfluence');
-});
+///* GET home page. */
+//router.get('/', function(req, res, next) {
+//    //res.render('fubar', { title: 'Zombo.com' });
+//    //res.send('TwInfluence');
+//});
 
-router.post('/hashtag', function(req, res) {
+router.post('/result', function(req, res) {
     console.log(req.body);
     var query = req.body['querytext'];
     var result = {};
     T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function(err, data, response) {
         tweets = data.statuses;
-        console.log(tweets);
+        //console.log(tweets);
         for (var i = 0; i < tweets.length; i++) {
-            console.log(tweets[i].text);
-            result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweets": []};
+            //console.log(tweets[i].text);
+            result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweeters": []};
         }
         console.log(result);
-        res.json(result);
     });
+    res.redirect('/result.html');
 });
 
 module.exports = router;
