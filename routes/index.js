@@ -22,8 +22,13 @@ router.post('/hashtag', function(req, res) {
     var query = req.body['querytext'];
     var result = {};
     T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function(err, data, response) {
-        console.log(data);
-        result = data;
+        tweets = data.statuses;
+        console.log(tweets);
+        for (var i = 0; i < tweets.length; i++) {
+            console.log(tweets[i].text);
+            result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweets": []};
+        }
+        console.log(result);
         res.json(result);
     });
 });
