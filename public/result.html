@@ -39,7 +39,13 @@
         #search {
             border-color: #36c936;
         }
-                
+
+        #vis {
+            max-width: 1000px;
+            max-height: 1000px;
+            margin: 30px auto 0 auto;
+        }
+
         .node {
           cursor: pointer;
         }
@@ -81,7 +87,8 @@
                 <input type="submit" value="Go!" class="btn btn-primary">
             </div>
         </form>
-    </div>
+        </div>
+        <div class="container" id="vis"></div>
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script>
         var margin = 20,
@@ -97,7 +104,7 @@
             .size([diameter - margin, diameter - margin])
             .value(function(d) { return d.size; })
 
-        var svg = d3.select("body").append("svg")
+        var svg = d3.select("#vis").append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
           .append("g")
@@ -127,7 +134,7 @@
 
           var node = svg.selectAll("circle,text");
 
-          d3.select("body")
+          d3.select("#vis")
               .style("background-color", "white")
               .on("click", function() { zoom(root); });
 
