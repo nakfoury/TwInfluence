@@ -1,0 +1,65 @@
+{
+  "name": "#Hillary2016",
+  "children": [
+    {
+      "name": "@BarackObama",
+      "image": "https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY.png",
+      "tweet": "I just high-fived our next President! #Hillary2016",
+      "children": [
+        {"name": "@Batman", "followerNo": 17010, "image": "https://pbs.twimg.com/profile_images/17847592/batmanbegins_400x400.png"},
+        {"name": "@Robin", "followerNo": 5842},
+        {"name": "@HarryPotter", "followerNo": 6842, "image": "https://pbs.twimg.com/profile_images/440543002780372992/6tbFBP4R_400x400.jpeg"},
+        {"name": "@DarthVadar", "followerNo": 1041},
+        {"name": "@Handle", "followerNo": 5176}
+      ]
+    },
+    {
+      "name": "@HillaryClinton",
+      "image": "https://pbs.twimg.com/profile_images/601465287859306496/EAIt163y.png",
+      "tweet": "Vote for #Hillary2016!",
+      "children": [
+        {"name": "DirtySprite", "followerNo": 8833},
+        {"name": "LineSprite", "followerNo": 1732},
+        {"name": "RectSprite", "followerNo": 3623},
+        {"name": "IScaleMap", "followerNo": 2105},
+        {"name": "TextSprite", "followerNo": 10066}
+      ]
+    },
+    {
+      "name": "@Pikachu",
+      "image": "https://pbs.twimg.com/profile_images/729600472/_____.jpg",
+      "tweet": "Pika piiiikaaa! #Hillary2016",
+      "children": [
+        {"name": "DragForce", "followerNo": 1082},
+        {"name": "GravityForce", "followerNo": 1336},
+        {"name": "IForce", "followerNo": 319},
+        {"name": "NBodyForce", "followerNo": 10498},
+        {"name": "Particle", "followerNo": 2822}
+      ]
+    },
+    {
+      "name": "@LadyGaga",
+      "image": "https://pbs.twimg.com/profile_images/570633403185262592/j3qPLI4u_400x400.jpeg",
+      "tweet": "lalala #Hillary2016",
+      "children": [
+        {"name": "LinearScale", "followerNo": 1316},
+        {"name": "LogScale", "followerNo": 3151},
+        {"name": "OrdinalScale", "followerNo": 3770},
+        {"name": "QuantileScale", "followerNo": 2435},
+        {"name": "QuantitativeScale", "followerNo": 4839}
+      ]
+    },
+    {
+      "name": "@JebBush",
+      "image": "https://pbs.twimg.com/profile_images/591000793303547905/eu1KYXqx_400x400.jpg",
+      "tweet": "You're welcome to try. #Hillary2016",
+      "children": [
+        {"name": "Arrays", "followerNo": 8258},
+        {"name": "Colors", "followerNo": 10001},
+        {"name": "Dates", "followerNo": 8217},
+        {"name": "Displays", "followerNo": 12555},
+        {"name": "Filter", "followerNo": 2324}
+      ]
+    }
+  ]
+}
