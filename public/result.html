@@ -17,6 +17,9 @@
         em {
           font-style: normal;
           color: #fb4444;
+          font-size:150%;
+          font-family:"Lato";
+          font-weight:900;
         }
         h2 {
             text-align: center;
@@ -51,14 +54,35 @@
         }
 
         #share-button, img {
-            max-width:30px;
+            max-width:50px;
             max-height:auto;
             display:inline;
         }
 
+        .form-group {
+            position: relative;
+            margin: 1% auto 0% auto;
+        }
+
+        form-group input {
+            font-family: Lato;
+            font-size: 2em;
+        }
+
+        .form-control {
+            height: 1.5em;
+            font-size: 3em;
+            border: 3px solid #57d757;
+            border-radius:10px;
+            padding: 0 0.1em 0 0.1em;
+
+        }
+
         .btn-primary {
             background-color: #36c936;
-            border-color: #57d757; 
+            border-color: #57d757;
+            width: 4em;
+            height: 4em;
         }
 
         .btn-primary:hover {
@@ -105,8 +129,8 @@
     </head>
 
     <body>
-        <h1>Tw<em>influ</em>ence</h1>
-        <h2>Here are the top influencers behind</h2>
+        <h1><em>#</em>Influence</h1>
+        <h2>They are the folks driving conversations behind</h2>
          <div class="span7 text-center">
         <form class='form-inline' style='margin:2%;' method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
             <div class="form-group">
