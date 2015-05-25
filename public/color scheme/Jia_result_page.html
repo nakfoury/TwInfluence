@@ -97,7 +97,7 @@
         }
 
         .image {
-            border: 20px solid black;
+            vertical-align: middle;
         }
 
         .node--root,
@@ -143,7 +143,7 @@
             .append("g")
             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json("package.json", function(error, root) {
+    d3.json("tweetdata.json", function(error, root) {
         if (error) return console.error(error);
 
         var focus = root,
@@ -164,6 +164,7 @@
                 .enter()
                 .append("text")
                 .attr("class", "handle")
+                .style ("text-anchor", "middle")
                 .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
                 .style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.name; });
@@ -171,11 +172,21 @@
         var tweet = svgContainer.selectAll("p")
                 .data(nodes)
                 .enter()
-                .append("p")
+                .append("text")
                 .attr("class", "tweet")
-            //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-            //.style("display", function(d) { return d.parent === root ? null : "none"; })
-                .text(function(d) { return d.tweet; });
+                .style ("text-anchor", "middle")
+                .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+                .style("display", function(d) { return d.parent === root ? null : "none"; })
+                .text(function(d) { console.log(d.tweet); return d.tweet; });
+
+        /*var tweet = svgContainer.selectAll("text")
+         .data(nodes)
+         .enter()
+         .append("text")
+         .attr("class", "tweet")
+         //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+         //.style("display", function(d) { return d.parent === root ? null : "none"; })
+         .text(function(d) { return d.tweet; });*/
 
         var image = svgContainer.selectAll("image")
                 .data(nodes)
@@ -189,30 +200,30 @@
         //.style("display", function(d) { return d.parent === root ? null : "none"; });
 
 
-        var node = svgContainer.selectAll("circle,text,image");
+        var node = svgContainer.selectAll("circle,text,image,p");
 
-        d3.select("body")
-                .style("background-color", "white")
-                .on("click", function() { zoom(root); });
+        /*d3.select("body")
+         .style("background-color", "white")
+         .on("click", function() { zoom(root); });*/
 
         zoomTo([root.x, root.y, root.r * 2 + margin]);
 
-        function zoom(d) {
-            var focus0 = focus; focus = d;
+        /*function zoom(d) {
+         var focus0 = focus; focus = d;
 
-            var transition = d3.transition()
-                    .duration(d3.event.altKey ? 7500 : 750)
-                    .tween("zoom", function(d) {
-                        var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-                        return function(t) { zoomTo(i(t)); };
-                    });
+         /*var transition = d3.transition()
+         .duration(d3.event.altKey ? 7500 : 750)
+         .tween("zoom", function(d) {
+         var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+         return function(t) { zoomTo(i(t)); };
+         });*/
 
-            transition.selectAll("text")
-                    .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-                    .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-                    .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-                    .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-        }
+        /*transition.selectAll("text")
+         .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+         .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+         .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+         .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });*/
+        //}
 
         function zoomTo(v) {
             var k = diameter / v[2]; view = v;
