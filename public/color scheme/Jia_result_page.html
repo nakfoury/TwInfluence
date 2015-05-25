@@ -5,6 +5,7 @@
     <title>Twinfluence</title>
     <!-- Bootstrap -->
     <link rel='stylesheet' href='http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/css/1a39e300513408353c8db4ae0eaf58aebef1386f/css/bootstrap.min.css'/>
+
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
 
@@ -143,7 +144,7 @@
             .append("g")
             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json("tweetdata.json", function(error, root) {
+    d3.json("package.json", function(error, root) {
         if (error) return console.error(error);
 
         var focus = root,
@@ -157,7 +158,7 @@
                 .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
                 .style("fill", function(d) { return d.children ? color(d.depth) : null; })
                 .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
-                .style("fill","https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY.png");
+        //.style("fill","yellow");
 
         var handle = svgContainer.selectAll("text")
                 .data(nodes)
@@ -177,16 +178,7 @@
                 .style ("text-anchor", "middle")
                 .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
                 .style("display", function(d) { return d.parent === root ? null : "none"; })
-                .text(function(d) { console.log(d.tweet); return d.tweet; });
-
-        /*var tweet = svgContainer.selectAll("text")
-         .data(nodes)
-         .enter()
-         .append("text")
-         .attr("class", "tweet")
-         //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-         //.style("display", function(d) { return d.parent === root ? null : "none"; })
-         .text(function(d) { return d.tweet; });*/
+                .text(function(d) { return d.tweet; });
 
         var image = svgContainer.selectAll("image")
                 .data(nodes)
@@ -200,34 +192,61 @@
         //.style("display", function(d) { return d.parent === root ? null : "none"; });
 
 
-        var node = svgContainer.selectAll("circle,text,image,p");
+        var node = svgContainer.selectAll("circle");
 
-        /*d3.select("body")
-         .style("background-color", "white")
-         .on("click", function() { zoom(root); });*/
+        var tweetnode = svgContainer.selectAll(".tweet");
+
+        var handlenode = svgContainer.selectAll(".handle");
+
+        var imagenode = svgContainer.selectAll("image");
+
+
+        d3.select("body")
+                .style("background-color", "white")
+                .on("click", function() { zoom(root); });
 
         zoomTo([root.x, root.y, root.r * 2 + margin]);
 
-        /*function zoom(d) {
-         var focus0 = focus; focus = d;
+        function zoom(d) {
+            var focus0 = focus; focus = d;
 
-         /*var transition = d3.transition()
-         .duration(d3.event.altKey ? 7500 : 750)
-         .tween("zoom", function(d) {
-         var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-         return function(t) { zoomTo(i(t)); };
-         });*/
+            var transition = d3.transition()
+                    .duration(d3.event.altKey ? 7500 : 750)
+                    .tween("zoom", function(d) {
+                        var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+                        return function(t) { zoomTo(i(t)); };
+                    });
 
-        /*transition.selectAll("text")
-         .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-         .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-         .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-         .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });*/
-        //}
+            transition.selectAll("text")
+                    .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+                    .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+                    .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+                    .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+        }
 
         function zoomTo(v) {
+            console.log("hereee");
+            console.log(root);
             var k = diameter / v[2]; view = v;
+
             node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+
+            tweetnode.attr("transform", function(d) {
+                var tweetnode_x = d.x - v[0];
+                var tweetnode_y = d.y - v[1];
+                var tweetnode_r = d.r;
+                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.2 * tweetnode_r) * k + ")"; });
+
+            handlenode.attr("transform", function(d) {
+                var handlenode_x = d.x - v[0];
+                var handlenode_y = d.y - v[1];
+                var handlenode_r = d.r;
+                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.4 * handlenode_r) * k + ")"; });
+            imagenode.attr("transform", function(d) {
+                var imagenode_x = d.x - v[0];
+                var imagenode_y = d.y - v[1];
+                var imagenode_r = d.r;
+                return "translate(" + (imagenode_x * k -25) + "," + (imagenode_y - 1 * imagenode_r) * k + ")"; });
             circle.attr("r", function(d) { return d.r * k; });
         }
     });
