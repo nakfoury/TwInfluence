@@ -21,30 +21,35 @@ var T = new Twit({
 router.post('/result', function(req, res) {
     console.log(req.body);
     var query = req.body['querytext'];
+    var result = { "name": query, "children": [] };
     //var result = { "name": "tweets", "children": [] }; //for jia's page
-    var data_two = {name: "root", children: []};
+    //var data_two = {name: "root", children: []};
     T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function(err, data, response) {
         var tweets = data.statuses;
-
-        for (var i = 0; i < tweets.length; i++) {
+        tweets.forEach(function(tweet) {
+            result.children += { "name": tweet.user.screen_name, "image": tweet.user.profile_image_url, "tweet": tweet.text, "retweetNo": tweet.retweet_count, "children": [] };
             //result[i] = {"id": tweets[i].id, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweeters": []};
-            data_two.children[i] = { name: tweets[i].user.name, size: tweets[i].retweet_count/*, image: tweets[i].user.profile_image*/, children: []};
-            T.get('statuses/retweeters/ids', {id: tweets[i].id, stringify_ids: true}, function(err, data, response) {
-                var RTIDs = data.ids;
-                var dict = {};
+            //data_two.children[i] = { name: tweets[i].user.name, size: tweets[i].retweet_count/*, image: tweets[i].user.profile_image*/, children: []};
 
-                for (var j = 1; j < 5; j++) {
-                    //result.children[i].children[j] = { "name": RTIDs[j], "size": tweets[i].retweet_count/j };//for jia's page
-                    T.get('users/show', {user_id: RTIDs[j]}, function(err, data, response) {
-                        //dict[data.name] = data.follower_count; for sorting more
-                        data_two.children[i].children[j] = {name: data.name, follower_count: data.follower_count};
-                    });
+            T.get('statuses/retweeters/ids', {id: tweet.id, stringify_ids: true}, function(err, data, response) {
+                console.log(tweet.id);
+                if (data) {
+                    var RTIDs = data.ids;
+                    var dict = {};
+
+                    for (var j = 1; j < 5; j++) {
+                        //result.children[i].children[j] = { "name": RTIDs[j], "size": tweets[i].retweet_count/j };//for jia's page
+                        T.get('users/show', {user_id: RTIDs[j]}, function (err, data, response) {
+                            //dict[data.name] = data.follower_count; for sorting more
+                            data_two.children[i].children[j] = {name: data.name, follower_count: data.follower_count};
+                        });
+                    }
                 }
             });
-        }
+        });
 
-        //console.log(result);
-        fs.writeFile('public/twitter_data2.json', JSON.stringify(data_two));
+        console.log(result);
+        fs.writeFile('public/twitter_data2.json', JSON.stringify(result));
     });
     res.redirect('/result.html');
 });
