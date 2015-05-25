@@ -22,9 +22,10 @@ router.post('/result', function(req, res) {
     console.log(req.body);
     var query = req.body['querytext'];
     var result = { "name": query, children: [] };
+    var i = 0;
     //var result = { "name": "tweets", "children": [] }; //for jia's page
     //var data_two = {name: "root", children: []};
-    T.get('search/tweets', {q: query, count: 2, result_type: "popular"}, function(err, data, response) {
+    T.get('search/tweets', {q: query, count: 3, result_type: "popular"}, function(err, data, response) {
         if (err) {
             console.log(err);
             console.log("search/tweets");
@@ -32,10 +33,7 @@ router.post('/result', function(req, res) {
         var tweets = data.statuses;
         tweets.forEach(function(tweet) {
             result.children += { "name": tweet.user.screen_name, "image": tweet.user.profile_image_url, "tweet": tweet.text, "retweetNo": tweet.retweet_count, children: [] };
-            //result[i] = {"id": tweets[i].id_str, "text": tweets[i].text, "retweets": tweets[i].retweet_count, "name": tweets[i].user.name, "handle": tweets[i].user.screen_name, "image": tweets[i].user.profile_image_url, "retweeters": []};
-            //data_two.children[i] = { name: tweets[i].user.name, size: tweets[i].retweet_count/*, image: tweets[i].user.profile_image*/, children: []};
-
-            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 10, stringify_ids: true}, function(err, data2, response) {
+            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 3, stringify_ids: true}, function(err, data2, response) {
                 if (err) {
                     console.log(err);
                     console.log("statuses/retweeters/ids");
@@ -44,35 +42,34 @@ router.post('/result', function(req, res) {
                     var RTIDs = data2.ids;
                     var dict = [];
                     RTIDs.forEach(function(RTID) {
-                        //result.children[i].children[j] = { "name": RTIDs[j], "size": tweets[i].retweet_count/j };//for jia's page
-                        T.get('users/show', {user_id: RTID}, function (err, data, response) {
+                        T.get('users/show', {user_id: RTID}, function (err, data3, response) {
                             if(err) {
                                 console.log(err);
                                 console.log("users/show");
                             }
-                            //dict[data.name] = data.follower_count; for sorting more
-                            //data_two.children[i].children[j] = {name: data.name, follower_count: data.follower_count};
-
-                            dict += { "name": data.name, "follower_count": data.follower_count, "image": data.profile_image_url}
-
+                            else {
+                                dict += { "name": data3.name, "followers": data3.followers_count, "image": data3.profile_image_url};
+                            }
                         });
                     });
 
-                    function custom_cmp (a,b) {
-                        return a.follower_count - b.follower_count;
-                    }
-                    dict.sort(custom_cmp).reverse();
+                    dict = dict.sort(function(a,b) {
+                        return a.followers - b.followers;
+                    }).reverse();
+                    console.log("this is the dict, reversed, hopefully:");
                     console.log(dict);
-                    //for (var k=0; k<5; k++) {
-                    //    result.children.children += { "name": dict[k].name, "followerNo": dict[k].follower_count, "image": dict[k].profile_image_url};
-                    //}
+                    for (var k=0; k<5; k++) {
+                        result.children[i].children += dict[k];
+                    }
                 }
             });
+            i++;
         });
 
-        console.log(result);
-        fs.writeFile('public/twitter_data2.json', JSON.stringify(result));
+
     });
+    console.log(result);
+    fs.writeFileSync('public/twitter_data2.json', JSON.stringify(result));
     res.redirect('/result.html');
 });
 
