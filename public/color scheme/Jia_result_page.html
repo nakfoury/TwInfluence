@@ -5,12 +5,111 @@
     <title>Twinfluence</title>
     <!-- Bootstrap -->
     <link rel='stylesheet' href='http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/css/1a39e300513408353c8db4ae0eaf58aebef1386f/css/bootstrap.min.css'/>
-    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+        @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
+
+        h1 {
+            text-align: center;
+            font-size: 5em;
+            font-family: Righteous;
+            margin: 50px auto 0 auto;
+        }
+
+        em {
+            font-style: normal;
+            color: #fb4444;
+            font-size: 2em;
+            vertical-align: top;
+            line-height: 0.5em;
+        }
+
+        h2 {
+            text-align: center;
+            font-family: Lato;
+            font-weight: 700;
+            font-size: 2.2em;
+            margin-top: 2%;
+        }
+
+        /*search bar*/
+        .form-group {
+            position: relative;
+            margin: 2% auto 0 auto;
+        }
+
+        .form-group input {
+            font-family: Lato;
+            font-size: 2em;
+        }
+
+        .form-control {
+            height: 2em;
+            border: 3px solid #57d757;
+            padding: 0 6em 0 1em;
+        }
+
+        .btn-primary {
+            background-color: #36c936;
+            border-color: #57d757;
+            width: 2em;
+            height: 2em;
+        }
+
+        .btn-primary:hover {
+            background-color: #079107;
+            border-color: #36c936;
+        }
+
+        #search {
+            border-color: #36c936;
+        }
+
+        /*svg*/
+        section {
+            max-width: 800px;
+            max-height: 800px;
+            margin: 5% auto;
+        }
+
+        .node {
+            cursor: pointer;
+        }
+
+        .node:hover {
+            stroke: #079107;
+            stroke-width: 5px;
+        }
+
+        .node--leaf {
+            fill: #84e684;
+        }
+
+        .handle {
+            font-family: Lato;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .tweet {
+            font-family: Lato;
+            font-weight: 300;
+            font-size: 15px;
+        }
+
+        .image {
+            border: 20px solid black;
+        }
+
+        .node--root,
+        .node--leaf {
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
-<h1>Tw<em>influ</em>ence</h1>
-<h2>Here are the top influencers behind</h2>
+<h1><em>#</em>influence</h1>
+<h2>These are the folks driving the conversation behind</h2>
 <div class="span7 text-center">
     <form class='form-inline' style='margin:2%;' method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
         <div class="form-group">
@@ -22,10 +121,11 @@
         </div>
     </form>
 </div>
+<section></section>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
     var margin = 20,
-            diameter = 960;
+            diameter = 800;
 
     var color = d3.scale.linear()
             .domain([-1, 5])
@@ -35,37 +135,61 @@
     var pack = d3.layout.pack()
             .padding(2)
             .size([diameter - margin, diameter - margin])
-            .value(function(d) { return d.size; });
+            .value(function(d) { return d.followerNo; })
 
-    var svg = d3.select("body").append("svg")
+    var svgContainer = d3.select("section").append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
             .append("g")
             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json("package.json", function(error, root) {
+    d3.json("tweetdata.json", function(error, root) {
         if (error) return console.error(error);
 
         var focus = root,
                 nodes = pack.nodes(root),
                 view;
 
-        var circle = svg.selectAll("circle")
+        var circle = svgContainer.selectAll("circle")
                 .data(nodes)
-                .enter().append("circle")
+                .enter()
+                .append("circle")
                 .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
                 .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+                .style("fill","https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY.png");
 
-        var text = svg.selectAll("text")
+        var handle = svgContainer.selectAll("text")
                 .data(nodes)
-                .enter().append("text")
-                .attr("class", "label")
+                .enter()
+                .append("text")
+                .attr("class", "handle")
                 .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
                 .style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.name; });
 
-        var node = svg.selectAll("circle,text");
+        var tweet = svgContainer.selectAll("p")
+                .data(nodes)
+                .enter()
+                .append("p")
+                .attr("class", "tweet")
+            //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+            //.style("display", function(d) { return d.parent === root ? null : "none"; })
+                .text(function(d) { return d.tweet; });
+
+        var image = svgContainer.selectAll("image")
+                .data(nodes)
+                .enter()
+                .append("svg:image")
+                .attr("class", "image")
+                .attr("xlink:href", function(d) { return d.image; })
+                .attr("width", 50)
+                .attr("height", 50);
+        //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+        //.style("display", function(d) { return d.parent === root ? null : "none"; });
+
+
+        var node = svgContainer.selectAll("circle,text,image");
 
         d3.select("body")
                 .style("background-color", "white")
