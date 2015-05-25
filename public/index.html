@@ -32,22 +32,31 @@
 
         h1 {
             text-align: center;
-            font-size: 10em;
+            font-size: 8em;
             font-family: Righteous;
-            margin: 10% auto 5% auto;
+            margin: 8% auto 5% auto;
+
+        }
+
+        h1:first-letter {
+            font-family: "Lato", selif;
+            color: #fb4444;
+            font-weight:900;
         }
         span {
             color: #fb4444;
+            font-size:150%;
         }
 
         .article {
             text-align: center;
-            font-size: 2em;
-            margin: 5% auto 0 auto;
+            font-size: 1.5em;
+            margin: 2% auto 0 auto;
         }
 
         h2 {
             font-weight: 700;
+            font-size: 1.3em;
 
         }
 
@@ -80,12 +89,48 @@
             border-color: #36c936;
         }
 
+        ul.share-buttons{
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.share-buttons li{
+            display: inline;
+        }
+
+        #share-button {
+            margin:80px auto 0 auto;
+            text-align: center;
+        }
+
+        #share-button, img {
+            max-width:30px;
+            max-height:auto;
+            display:inline;
+        }
+
         /* .navbar-brand {
             font-family: Righteous;
             font-size: 1.5em;
             margin-left: 20px;
         } */
+        @media screen and (max-width:800px) {
+            h1 {
+                text-align: center;
+                font-size: 5em;
+                font-family: "Lato", selif;
+                font-weight: 900;
+                margin: 50px auto 0 auto;
+            }
 
+            h2, h3 {
+                font-size:0.8em;
+            }
+            #share-button {
+                margin:20px auto 0 auto;
+                text-align: center;
+            }
+        }
     </style>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
@@ -116,11 +161,11 @@
 
     <!-- Body -->
     <div>
-        <h1>Tw<span>influ</span>ence</h1>
+        <h1><span>#</span>Influence</h1>
     </div>
     <div class="article">
-        <h2>Who are the top influencers on Twitter?</h2>
-        <h3>Type in a hashtag that interests you to find out!</h3>
+        <h2>Who's driving the conversation<br /> around your favorite <span>#hashtag</span>?</h2>
+        <h3>Type in a <span>#</span> to find out!</h3>
     </div>
 
     <div class="span7 text-center">
@@ -135,7 +180,16 @@
         </form>
     </div>
 
-</div>
+    <div id="share-button">
+        <ul class="share-buttons">
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
+            <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
+            <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
+            <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
+            <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
+            <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
+        </ul>
+    </div>
 
 
 </div>
