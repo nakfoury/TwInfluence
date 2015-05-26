@@ -34,18 +34,16 @@
             text-align: center;
             font-size: 8em;
             font-family: Righteous;
-            margin: 8% auto 5% auto;
+            margin: 8% auto 2% auto;
 
         }
 
-        h1:first-letter {
-            font-family: "Lato", selif;
-            color: #fb4444;
-            font-weight:900;
-        }
-        span {
+        em {
+            font-style: normal;
             color: #fb4444;
             font-size:150%;
+            font-family:"Lato";
+            font-weight:900;
         }
 
         .article {
@@ -57,27 +55,40 @@
         h2 {
             font-weight: 700;
             font-size: 1.3em;
+            margin:0;
+            padding:0;
 
         }
 
         h3 {
             font-weight: 300;
-            margin-top: 1em;
+            margin-top: 0;
         }
 
         .form-group {
             position: relative;
-            margin: 2% auto 0 auto;
+            margin: 1% auto 0% auto;
         }
 
-        .form-group input {
+        form-group input {
             font-family: Lato;
-            font-size: 1em;
+            font-size: 2em;
+        }
+
+        .form-control {
+            height: 1.5em;
+            font-size: 3em;
+            border: 3px solid #57d757;
+            border-radius:10px;
+            padding: 0 0.1em 0 0.1em;
+
         }
 
         .btn-primary {
             background-color: #36c936;
             border-color: #57d757;
+            width: 4em;
+            height: 4em;
         }
 
         .btn-primary:hover {
@@ -104,7 +115,8 @@
         }
 
         #share-button, img {
-            max-width:30px;
+            margin-top:30px;
+            max-width:50px;
             max-height:auto;
             display:inline;
         }
@@ -162,18 +174,18 @@
 
     <!-- Body -->
     <div>
-        <h1><span>#</span>Influence</h1>
+        <h1><em>#</em>Influence</h1>
     </div>
     <div class="article">
-        <h2>Who's driving the conversation<br /> around your favorite <span>#hashtag</span>?</h2>
-        <h3>Type in a <span>#</span> to find out!</h3>
+        <h2>Who's driving the conversation<br /> around your favorite <em>#hashtag</em>?</h2>
+        <h2>Type in a <em>#</em> to find out!</h2>
     </div>
 
     <div class="span7 text-center">
-        <form class='form-inline' style='margin:2%;' method='post' action="result"><input type='hidden' name='form-name' value='form 1' />
+        <form class='form-inline' style="margin:1%" method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
             <div class="form-group">
                 <label class="sr-only control-label" for="search"></label>
-                <input type="text"  name="querytext" id="search" class="form-control" placeholder="# Type Hashtag!" />
+                <input type="text"  name="querytext" id="search" class="form-control" placeholder="# Type hashtag" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Go!" class="btn btn-primary">
