@@ -75,22 +75,43 @@
 
         .node {
             cursor: pointer;
+            fill-opacity: 0.6;
+        }
+
+        .node--root {
+            fill: #57d757;
+            fill-opacity: 1;
+        }
+
+        .node--leaf {
+            fill-opacity: 0.9;
         }
 
         .node:hover {
             stroke: #079107;
-            stroke-width: 5px;
+            stroke-width: 0.6em;
+            fill-opacity: 1;
         }
 
-        .node--leaf {
-            fill: #84e684;
+        .node--root {
+            pointer-events: none;
+        }
+
+        .node--leaf:hover {
+            stroke: #84e684;
+            stroke-width: 0.2em;
+            fill-opacity: 1;
+
+        }
+
+        text {
+            fill: white;
         }
 
         .handle {
             font-family: Lato;
             font-weight: 700;
             font-size: 1.5em;
-            fill: #fb4444;
         }
 
         .tweet {
@@ -103,10 +124,6 @@
             vertical-align: middle;
         }
 
-        .node--root,
-        .node--leaf {
-            pointer-events: none;
-        }
     </style>
 </head>
 
@@ -153,14 +170,29 @@
                 nodes = pack.nodes(root),
                 view;
 
+        var defs = svgContainer.selectAll("defs")
+                .data(nodes)
+                .enter()
+                .append("defs").attr("id", "imgdefs");
+
+        var pattern = defs.append("pattern")
+                .attr("id", function(d) { return d.name; })
+                .attr("height", 1)
+                .attr("width", 1);
+
+        var patternimage = pattern.append("svg:image")
+                .attr("width", function(d) { return d.r * 2; })
+                .attr("height", function(d) { return d.r * 2; })
+                .attr("xlink:href", function(d) { return d.image; });
+
         var circle = svgContainer.selectAll("circle")
                 .data(nodes)
                 .enter()
                 .append("circle")
+                .attr("fill", function(d) { return "url(#" + d.name + ")" ; })
                 .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-                .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
-        //.style("fill","yellow");
+            //.style("fill", function(d) { return d.children ? color(d.depth) : null; })
+                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
         var handle = svgContainer.selectAll("handle")
                 .data(nodes)
@@ -182,14 +214,14 @@
             //.style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.tweet; });
 
-        var image = svgContainer.selectAll("image")
-                .data(nodes)
-                .enter()
-                .append("svg:image")
-                .attr("class", "image")
-                .attr("xlink:href", function(d) { return d.image; })
-                .attr("width", function(d) { return d.r * 0.5; })
-                .attr("height", function(d) { return d.r * 0.5; })
+        /*var image = svgContainer.selectAll("image")
+         .data(nodes)
+         .enter()
+         .append("svg:image")
+         .attr("class", "image")
+         .attr("xlink:href", function(d) { return d.image; })
+         .attr("width", function(d) { return d.r * 0.5; })
+         .attr("height", function(d) { return d.r * 0.5; });*/
         //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
         //.style("display", function(d) { return d.parent === root ? null : "none"; });
 
@@ -200,7 +232,7 @@
 
         var handlenode = svgContainer.selectAll(".handle");
 
-        var imagenode = svgContainer.selectAll("image");
+        //var imagenode = svgContainer.selectAll("image");
 
 
         d3.select("body")
@@ -236,18 +268,19 @@
                 var tweetnode_x = d.x - v[0];
                 var tweetnode_y = d.y - v[1];
                 var tweetnode_r = d.r;
-                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.2 * tweetnode_r) * k + ")"; });
+                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.4 * tweetnode_r) * k + ")"; });
 
             handlenode.attr("transform", function(d) {
                 var handlenode_x = d.x - v[0];
                 var handlenode_y = d.y - v[1];
                 var handlenode_r = d.r;
-                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.35 * handlenode_r) * k + ")"; });
-            imagenode.attr("transform", function(d) {
-                var imagenode_x = d.x - v[0];
-                var imagenode_y = d.y - v[1];
-                var imagenode_r = d.r;
-                return "translate(" + (imagenode_x * k - imagenode_r * 0.25) + "," + (imagenode_y - 1 * imagenode_r) * k + ")"; });
+                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.7 * handlenode_r) * k + ")"; });
+
+            /*imagenode.attr("transform", function(d) {             
+             var imagenode_x = d.x - v[0];
+             var imagenode_y = d.y - v[1];
+             var imagenode_r = d.r;
+             return "translate(" + (imagenode_x * k - imagenode_r * 0.25) + "," + (imagenode_y - 1 * imagenode_r) * k + ")"; });*/
             circle.attr("r", function(d) { return d.r * k; });
         }
     });
