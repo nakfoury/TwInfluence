@@ -70,6 +70,7 @@
             max-width: 800px;
             max-height: 800px;
             margin: 5% auto;
+            outline: 1px solid transparent;
         }
 
         .node {
@@ -88,13 +89,14 @@
         .handle {
             font-family: Lato;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 1.5em;
+            fill: #fb4444;
         }
 
         .tweet {
             font-family: Lato;
             font-weight: 300;
-            font-size: 15px;
+            font-size: 1.1em;
         }
 
         .image {
@@ -160,7 +162,7 @@
                 .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
         //.style("fill","yellow");
 
-        var handle = svgContainer.selectAll("text")
+        var handle = svgContainer.selectAll("handle")
                 .data(nodes)
                 .enter()
                 .append("text")
@@ -170,14 +172,14 @@
                 .style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.name; });
 
-        var tweet = svgContainer.selectAll("p")
+        var tweet = svgContainer.selectAll("tweet")
                 .data(nodes)
                 .enter()
                 .append("text")
                 .attr("class", "tweet")
                 .style ("text-anchor", "middle")
-                .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-                .style("display", function(d) { return d.parent === root ? null : "none"; })
+            //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+            //.style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.tweet; });
 
         var image = svgContainer.selectAll("image")
@@ -186,8 +188,8 @@
                 .append("svg:image")
                 .attr("class", "image")
                 .attr("xlink:href", function(d) { return d.image; })
-                .attr("width", 50)
-                .attr("height", 50);
+                .attr("width", function(d) { return d.r * 0.5; })
+                .attr("height", function(d) { return d.r * 0.5; })
         //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
         //.style("display", function(d) { return d.parent === root ? null : "none"; });
 
@@ -225,8 +227,7 @@
         }
 
         function zoomTo(v) {
-            console.log("hereee");
-            console.log(root);
+
             var k = diameter / v[2]; view = v;
 
             node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
@@ -241,12 +242,12 @@
                 var handlenode_x = d.x - v[0];
                 var handlenode_y = d.y - v[1];
                 var handlenode_r = d.r;
-                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.4 * handlenode_r) * k + ")"; });
+                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.35 * handlenode_r) * k + ")"; });
             imagenode.attr("transform", function(d) {
                 var imagenode_x = d.x - v[0];
                 var imagenode_y = d.y - v[1];
                 var imagenode_r = d.r;
-                return "translate(" + (imagenode_x * k -25) + "," + (imagenode_y - 1 * imagenode_r) * k + ")"; });
+                return "translate(" + (imagenode_x * k - imagenode_r * 0.25) + "," + (imagenode_y - 1 * imagenode_r) * k + ")"; });
             circle.attr("r", function(d) { return d.r * k; });
         }
     });
