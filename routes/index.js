@@ -89,8 +89,9 @@ var T = new Twit({
 //    //res.send('TwInfluence');
 //});
 
-router.post('/result', function(req, res) {
+router.post('/hashtag', function(req, res) {
     var query = req.body['querytext'];
+    result.name = query;
 
     T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function (err, data, response) {
         if (err) {
@@ -98,12 +99,14 @@ router.post('/result', function(req, res) {
             console.log("at hashtag query (search/tweets)");
         }
         var tweets = data.statuses;
+        console.log(tweets);
         var i = 0;
+        var l = 0;
         tweets.forEach(function (tweet) {
-            result.children[i].name = tweet.user.screen_name;
-            result.children[i].image = tweet.user.profile_image_url;
-            result.children[i].tweet = tweet.text;
-            result.children[i].retweetNo = tweet.retweet_count;
+            result.children[l].name = tweet.user.screen_name;
+            result.children[l].image = tweet.user.profile_image_url;
+            result.children[l].tweet = tweet.text;
+            result.children[l].retweetNo = tweet.retweet_count;
             //loadRetweeters(tweet.id_str, result, i);
             T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 5, stringify_ids: true}, function(err, data2, response) {
                 if (err) {
@@ -133,10 +136,12 @@ router.post('/result', function(req, res) {
                 }
                 i++;
             });
+            l++;
         });
         //console.log(result);
         //jf.writeFileSync("public/twitter_data2.json", result);
     });
+    res.redirect('result.html');
 });
 
 module.exports = router;
