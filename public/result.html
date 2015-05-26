@@ -17,15 +17,26 @@
         em {
           font-style: normal;
           color: #fb4444;
+          font-size:150%;
+          font-family:"Lato";
+          font-weight:900;
         }
         h2 {
-          text-align: center;
-          font-family: Lato;
-          font-weight: 700;
-          font-size: 2em;
-          margin-top: 10px;
-          padding-bottom: 0;
+            text-align: center;
+            font-family: Lato;
+            font-weight: 700;
+            font-size: 2em;
+            margin-top: 0;
+            padding: 0;
         }
+
+        h5 {
+            font-weight:300;
+            text-align: center;
+            marign:0;
+            padding:0;
+        }
+
 
         ul.share-buttons{
             list-style: none;
@@ -38,18 +49,40 @@
 
         #share-button {
             margin:0 auto 0 auto;
+            padding:0;
             text-align: center;
         }
 
         #share-button, img {
-            max-width:30px;
+            max-width:50px;
             max-height:auto;
             display:inline;
         }
 
+        .form-group {
+            position: relative;
+            margin: 1% auto 0% auto;
+        }
+
+        form-group input {
+            font-family: Lato;
+            font-size: 2em;
+        }
+
+        .form-control {
+            height: 1.5em;
+            font-size: 3em;
+            border: 3px solid #57d757;
+            border-radius:10px;
+            padding: 0 0.1em 0 0.1em;
+
+        }
+
         .btn-primary {
             background-color: #36c936;
-            border-color: #57d757; 
+            border-color: #57d757;
+            width: 4em;
+            height: 4em;
         }
 
         .btn-primary:hover {
@@ -96,8 +129,8 @@
     </head>
 
     <body>
-        <h1>Tw<em>influ</em>ence</h1>
-        <h2>Here are the top influencers behind</h2>
+        <h1><em>#</em>Influence</h1>
+        <h2>They are the folks driving conversations behind</h2>
          <div class="span7 text-center">
         <form class='form-inline' style='margin:2%;' method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
             <div class="form-group">
@@ -108,18 +141,20 @@
                 <input type="submit" value="Go!" class="btn btn-primary">
             </div>
         </form>
-             <div id="share-button">
-                 <ul class="share-buttons">
-                     <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
-                     <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
-                     <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
-                     <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
-                     <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
-                     <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
-                 </ul>
-             </div>
         </div>
+
         <div class="container" id="vis"></div>
+        <h5>The big circles represent how many times they got retweeted.<br />The size of smaller circles is caluculated by the follower numbers.  </h5>
+        <div id="share-button">
+            <ul class="share-buttons">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
+                <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
+                <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
+                <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
+                <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
+                <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
+            </ul>
+        </div>
 
 
 
@@ -156,7 +191,10 @@
             .enter().append("circle")
               .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
               .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+              .style("stroke", "black")
+              .style("stroke-width", 0.5)
               .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
 
           var text = svg.selectAll("text")
               .data(nodes)
