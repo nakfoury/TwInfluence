@@ -109,7 +109,7 @@ router.post('/hashtag', function(req, res) {
             result.children[l].tweet = tweet.text;
             result.children[l].retweetNo = tweet.retweet_count;
             //loadRetweeters(tweet.id_str, result, i);
-            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 20, stringify_ids: true}, function(err, data2, response) {
+            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 15, stringify_ids: true}, function(err, data2, response) {
                 if (err) {
                     console.log(err);
                     console.log("at retweeter list query (statuses/retweeters/ids)");
