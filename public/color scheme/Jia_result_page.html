@@ -180,7 +180,7 @@
                 .attr("height", 1)
                 .attr("width", 1);
 
-        var patternimage = pattern.append("svg:image")
+        var image = pattern.append("svg:image")
                 .attr("width", function(d) { return d.r * 2; })
                 .attr("height", function(d) { return d.r * 2; })
                 .attr("xlink:href", function(d) { return d.image; });
@@ -234,7 +234,6 @@
 
         //var imagenode = svgContainer.selectAll("image");
 
-
         d3.select("body")
                 .style("background-color", "white")
                 .on("click", function() { zoom(root); });
@@ -276,11 +275,9 @@
                 var handlenode_r = d.r;
                 return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.7 * handlenode_r) * k + ")"; });
 
-            /*imagenode.attr("transform", function(d) {             
-             var imagenode_x = d.x - v[0];
-             var imagenode_y = d.y - v[1];
-             var imagenode_r = d.r;
-             return "translate(" + (imagenode_x * k - imagenode_r * 0.25) + "," + (imagenode_y - 1 * imagenode_r) * k + ")"; });*/
+            image.attr("width", function(d) { return d.r *k * 2; })
+                    .attr("height", function(d) { return d.r *k * 2; });
+
             circle.attr("r", function(d) { return d.r * k; });
         }
     });
