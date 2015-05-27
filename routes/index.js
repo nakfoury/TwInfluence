@@ -84,11 +84,11 @@ var T = new Twit({
     //callback: '52.24.28.184:3000/index.html'
 });
 
-///* GET home page. */
-//router.get('/', function(req, res, next) {
-//    //res.render('fubar', { title: 'Zombo.com' });
-//    //res.send('TwInfluence');
-//});
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    //res.render('fubar', { title: 'Zombo.com' });
+    //res.send('TwInfluence');
+});
 
 router.post('/hashtag', function(req, res) {
     var query = req.body['querytext'];
