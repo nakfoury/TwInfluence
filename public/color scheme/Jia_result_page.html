@@ -76,33 +76,37 @@
         .node {
             cursor: pointer;
             fill-opacity: 0.6;
+            stroke: #079107;
+            stroke-width: 0.5em;
         }
 
         .node--root {
             fill: #57d757;
             fill-opacity: 1;
+            stroke: transparent;
         }
 
         .node--leaf {
-            fill-opacity: 0.9;
+            fill-opacity: 1;
+            stroke: #84e684;
+            stroke-width: 0.2em;
         }
 
         .node:hover {
             stroke: #079107;
-            stroke-width: 0.6em;
+            stroke-width: 0.8em;
             fill-opacity: 1;
         }
 
-        .node--root {
+        .node--root, .node--leaf {
             pointer-events: none;
         }
 
-        .node--leaf:hover {
-            stroke: #84e684;
-            stroke-width: 0.2em;
-            fill-opacity: 1;
-
-        }
+        /*.node--leaf:hover {
+          stroke: #84e684;
+          stroke-width: 0.2em;
+          fill-opacity: 1;
+        }*/
 
         text {
             fill: white;
@@ -116,8 +120,8 @@
 
         .tweet {
             font-family: Lato;
-            font-weight: 300;
-            font-size: 1.1em;
+            font-weight: 400;
+            font-size: 1.2em;
         }
 
         .image {
@@ -213,18 +217,6 @@
             //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             //.style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.tweet; });
-
-        /*var image = svgContainer.selectAll("image")
-         .data(nodes)
-         .enter()
-         .append("svg:image")
-         .attr("class", "image")
-         .attr("xlink:href", function(d) { return d.image; })
-         .attr("width", function(d) { return d.r * 0.5; })
-         .attr("height", function(d) { return d.r * 0.5; });*/
-        //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-        //.style("display", function(d) { return d.parent === root ? null : "none"; });
-
 
         var node = svgContainer.selectAll("circle");
 
