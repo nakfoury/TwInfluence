@@ -5,6 +5,7 @@
     <title>Twinfluence</title>
     <!-- Bootstrap -->
     <link rel='stylesheet' href='http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/css/1a39e300513408353c8db4ae0eaf58aebef1386f/css/bootstrap.min.css'/>
+
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
 
@@ -69,41 +70,64 @@
             max-width: 800px;
             max-height: 800px;
             margin: 5% auto;
+            outline: 1px solid transparent;
         }
 
         .node {
             cursor: pointer;
+            fill-opacity: 0.6;
+            stroke: #079107;
+            stroke-width: 0.5em;
+        }
+
+        .node--root {
+            fill: #57d757;
+            fill-opacity: 1;
+            stroke: transparent;
+        }
+
+        .node--leaf {
+            fill-opacity: 1;
+            stroke: #84e684;
+            stroke-width: 0.2em;
         }
 
         .node:hover {
             stroke: #079107;
-            stroke-width: 5px;
+            stroke-width: 0.8em;
+            fill-opacity: 1;
         }
 
-        .node--leaf {
-            fill: #84e684;
+        .node--root, .node--leaf {
+            pointer-events: none;
+        }
+
+        /*.node--leaf:hover {
+          stroke: #84e684;
+          stroke-width: 0.2em;
+          fill-opacity: 1;
+        }*/
+
+        text {
+            fill: white;
         }
 
         .handle {
             font-family: Lato;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 1.5em;
         }
 
         .tweet {
             font-family: Lato;
-            font-weight: 300;
-            font-size: 15px;
+            font-weight: 400;
+            font-size: 1.2em;
         }
 
         .image {
-            border: 20px solid black;
+            vertical-align: middle;
         }
 
-        .node--root,
-        .node--leaf {
-            pointer-events: none;
-        }
     </style>
 </head>
 
@@ -143,53 +167,64 @@
             .append("g")
             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json("twitter_data.json", function(error, root) {
+    d3.json("package.json", function(error, root) {
         if (error) return console.error(error);
 
         var focus = root,
                 nodes = pack.nodes(root),
                 view;
 
+        var defs = svgContainer.selectAll("defs")
+                .data(nodes)
+                .enter()
+                .append("defs").attr("id", "imgdefs");
+
+        var pattern = defs.append("pattern")
+                .attr("id", function(d) { return d.name; })
+                .attr("height", 1)
+                .attr("width", 1);
+
+        var image = pattern.append("svg:image")
+                .attr("width", function(d) { return d.r * 2; })
+                .attr("height", function(d) { return d.r * 2; })
+                .attr("xlink:href", function(d) { return d.image; });
+
         var circle = svgContainer.selectAll("circle")
                 .data(nodes)
                 .enter()
                 .append("circle")
+                .attr("fill", function(d) { return "url(#" + d.name + ")" ; })
                 .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-                .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
-                .style("fill","https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY.png");
+            //.style("fill", function(d) { return d.children ? color(d.depth) : null; })
+                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
-        var handle = svgContainer.selectAll("text")
+        var handle = svgContainer.selectAll("handle")
                 .data(nodes)
                 .enter()
                 .append("text")
                 .attr("class", "handle")
+                .style ("text-anchor", "middle")
                 .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
                 .style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.name; });
 
-        var tweet = svgContainer.selectAll("p")
+        var tweet = svgContainer.selectAll("tweet")
                 .data(nodes)
                 .enter()
-                .append("p")
+                .append("text")
                 .attr("class", "tweet")
+                .style ("text-anchor", "middle")
             //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             //.style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.tweet; });
 
-        var image = svgContainer.selectAll("image")
-                .data(nodes)
-                .enter()
-                .append("svg:image")
-                .attr("class", "image")
-                .attr("xlink:href", function(d) { return d.image; })
-                .attr("width", 50)
-                .attr("height", 50);
-        //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-        //.style("display", function(d) { return d.parent === root ? null : "none"; });
+        var node = svgContainer.selectAll("circle");
 
+        var tweetnode = svgContainer.selectAll(".tweet");
 
-        var node = svgContainer.selectAll("circle,text,image");
+        var handlenode = svgContainer.selectAll(".handle");
+
+        //var imagenode = svgContainer.selectAll("image");
 
         d3.select("body")
                 .style("background-color", "white")
@@ -215,8 +250,26 @@
         }
 
         function zoomTo(v) {
+
             var k = diameter / v[2]; view = v;
+
             node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+
+            tweetnode.attr("transform", function(d) {
+                var tweetnode_x = d.x - v[0];
+                var tweetnode_y = d.y - v[1];
+                var tweetnode_r = d.r;
+                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.4 * tweetnode_r) * k + ")"; });
+
+            handlenode.attr("transform", function(d) {
+                var handlenode_x = d.x - v[0];
+                var handlenode_y = d.y - v[1];
+                var handlenode_r = d.r;
+                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.7 * handlenode_r) * k + ")"; });
+
+            image.attr("width", function(d) { return d.r *k * 2; })
+                    .attr("height", function(d) { return d.r *k * 2; });
+
             circle.attr("r", function(d) { return d.r * k; });
         }
     });
