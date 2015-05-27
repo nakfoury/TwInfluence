@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +40,10 @@
         em {
             color: #fb4444;
             font-style: normal;
+            color: #fb4444;
+            font-size:150%;
+            font-family:"Lato";
+            font-weight:900;
         }
 
         h1 em {
@@ -95,15 +98,53 @@
             border-color: #36c936;
         }
 
+        ul.share-buttons{
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.share-buttons li{
+            display: inline;
+        }
+
+        #share-button {
+            margin:80px auto 0 auto;
+            text-align: center;
+        }
+
+        #share-button, img {
+            margin-top:30px;
+            max-width:50px;
+            max-height:auto;
+            display:inline;
+        }
+
         /* .navbar-brand {
             font-family: Righteous;
             font-size: 1.5em;
             margin-left: 20px;
         } */
+        @media screen and (max-width:750px) {
+            h1 {
+                text-align: center;
+                font-size: 5em;
+                font-family: "Lato", selif;
+                font-weight: 900;
+                margin: 50px auto 0 auto;
+            }
 
+            h2, h3 {
+                font-size:0.8em;
+            }
+            #share-button {
+                margin:20px auto 0 auto;
+                text-align: center;
+            }
+        }
     </style>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <h1><em>#</em>influence</h1>
@@ -122,17 +163,40 @@
     </form>
 </div>
 
-<div id="share-button">
-    <ul class="share-buttons">
-        <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
-        <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
-        <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
-        <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
-        <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
-        <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
-    </ul>
-</div>
+    <!-- Body -->
+    <div>
+        <h1><em>#</em>Influence</h1>
+    </div>
+    <div class="article">
+        <h2>Who's driving the conversation<br /> behind a trendy <em>#hashtag</em>?</h2>
+        <h2>Type in a <em>#</em> to find out!</h2>
+    </div>
 
+    <div class="span7 text-center">
+        <form class='form-inline' style="margin:1%" method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
+            <div class="form-group">
+                <label class="sr-only control-label" for="search"></label>
+                <input type="text"  name="querytext" id="search" class="form-control" placeholder="# Type hashtag" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Go!" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+    <div id="share-button">
+        <ul class="share-buttons">
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
+            <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
+            <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
+            <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
+            <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
+            <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
+        </ul>
+    </div>
+
+
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
