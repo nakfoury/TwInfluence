@@ -73,6 +73,7 @@ var result = {
         }
     ]
 };
+var retweeters = [];
 
 /* Put OAuth stuff here */
 var T = new Twit({
@@ -108,7 +109,7 @@ router.post('/hashtag', function(req, res) {
             result.children[l].tweet = tweet.text;
             result.children[l].retweetNo = tweet.retweet_count;
             //loadRetweeters(tweet.id_str, result, i);
-            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 5, stringify_ids: true}, function(err, data2, response) {
+            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 20, stringify_ids: true}, function(err, data2, response) {
                 if (err) {
                     console.log(err);
                     console.log("at retweeter list query (statuses/retweeters/ids)");
@@ -118,6 +119,7 @@ router.post('/hashtag', function(req, res) {
                     var dict = [];
                     var j = 0;
                     var k = i;
+                    var m = 0;
                     RTIDs.forEach(function (RTID) {
                         T.get('users/show', {user_id: RTID}, function (err, data3, response) {
                             if (err) {
@@ -125,9 +127,10 @@ router.post('/hashtag', function(req, res) {
                                 console.log("at retweeter lookup (users/show");
                             }
                             else {
-                                result.children[k].children[j].name = data3.screen_name;
-                                result.children[k].children[j].followerNo = data3.followers_count;
-                                result.children[k].children[j].image = data3.profile_image_url;
+                                //result.children[k].children[j].name = data3.screen_name;
+                                //result.children[k].children[j].followerNo = data3.followers_count;
+                                //result.children[k].children[j].image = data3.profile_image_url;
+                                sortTopRetweeters(k, data3)
                             }
                             jf.writeFileSync("public/twitter_data.json", result);
                             j++;
@@ -143,5 +146,15 @@ router.post('/hashtag', function(req, res) {
     });
     res.redirect('result.html');
 });
+
+var sortTopRetweeters = function(resultIndex, curRT) {
+    retweeters.push({ "name":curRT.screen_name, "followerNo":curRT.followers_count, "image":curRT.profile_image_url });
+    retweeters.sort(function(a,b) {
+        return (b.followerNo - a.followerNo);
+    });
+    for (var n=0; (n < retweeters.length) && n < 5; n++) {
+        result.children[resultIndex].children[n] = retweeters[n];
+    }
+};
 
 module.exports = router;
