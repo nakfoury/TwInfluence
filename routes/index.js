@@ -120,6 +120,7 @@ router.post('/hashtag', function(req, res) {
                     var j = 0;
                     var k = i;
                     var m = 0;
+                    retweeters = [];
                     RTIDs.forEach(function (RTID) {
                         T.get('users/show', {user_id: RTID}, function (err, data3, response) {
                             if (err) {
