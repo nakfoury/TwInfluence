@@ -3,7 +3,7 @@
     <envs>
       <env name="DEBUG" value="TwInfluence:*" />
     </envs>
-    <browser url="http://localhost:3000/" />
+    <browser name="e5120d43-2c3f-47ef-9f26-65e539e05186" url="http://localhost:3000/" />
     <method />
   </configuration>
 </component>
