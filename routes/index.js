@@ -105,7 +105,7 @@ router.post('/hashtag', function(req, res) {
         var l = 0;
         tweets.forEach(function (tweet) {
             result.children[l].name = tweet.user.screen_name;
-            result.children[l].image = tweet.user.profile_image_url;
+            result.children[l].image = tweet.user.profile_image_url.replace("normal","400x400");
             result.children[l].tweet = tweet.text;
             result.children[l].retweetNo = tweet.retweet_count;
             //loadRetweeters(tweet.id_str, result, i);
@@ -130,7 +130,7 @@ router.post('/hashtag', function(req, res) {
                             else {
                                 result.children[k].children[j].name = data3.screen_name;
                                 result.children[k].children[j].followerNo = data3.followers_count;
-                                result.children[k].children[j].image = data3.profile_image_url;
+                                result.children[k].children[j].image = data3.profile_image_url.replace("normal","400x400");
                                 //sortTopRetweeters(k, data3)
                             }
                             jf.writeFileSync("public/twitter_data.json", result);
