@@ -242,14 +242,14 @@
                 //lineHeight = 1.1, // ems
                 //y = 10,
                         dx = function(d) { return -d.r/2; },
-                        dy = function(d) { return d.r/7.5; },
+                        dy = function(d) { return d.r/5; },
                         tspan = tweetText
                                 .text(null)
                                 .append("tspan")
                             //.attr("x", 0)
                             //.attr("y", y)
                                 .attr("dx", dx)
-                                .attr("dy", dy);
+                                .attr("dy", 0);
                 //.text("lalala");
 
                 console.log(words);
@@ -321,7 +321,7 @@
                 var tweetnode_x = d.x - v[0];
                 var tweetnode_y = d.y - v[1];
                 var tweetnode_r = d.r;
-                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.5 * tweetnode_r) * k + ")"; });
+                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.4 * tweetnode_r) * k + ")"; });
 
             handlenode.attr("transform", function(d) {
                 var handlenode_x = d.x - v[0];
