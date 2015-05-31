@@ -3,9 +3,28 @@ var router = express.Router();
 var Twit = require('twit');
 var fs = require('fs');
 var jf = require('jsonfile');
-var result = {
-    "name": "hashtag",
-    "children": [
+var result = {};
+var retweeters = [];
+
+/* Put OAuth stuff here */
+var T = new Twit({
+    consumer_key: 'luzRJQdzj4g0L7mjTZRDpo0PO',
+    consumer_secret: 'ABYUGC4a5qA5NCaV6VH5zO3Y3u9RhdGU5IeNiEHdXmz4fdWS34',
+    access_token: '392365525-X2Dh0aOkfp1EQt2R9o2bX17PkW60lmxVKEyTdr22',
+    access_token_secret: 'fFWofKgtDPybsipGkwFSiZWqFb0pVYE59qr6TbLiBhHFY'
+    //callback: '52.24.28.184:3000/index.html'
+});
+
+/* GET home page. */
+//router.get('/', function(req, res, next) {
+//    //res.render('fubar', { title: 'Zombo.com' });
+//    //res.send('TwInfluence');
+//});
+
+router.post('/hashtag', function(req, res) {
+    result = {
+        "name": "hashtag",
+        "children": [
         {
             "name": "@handle1",
             "image": "url",
@@ -72,29 +91,100 @@ var result = {
             ]
         }
     ]
-};
-var retweeters = [];
-
-/* Put OAuth stuff here */
-var T = new Twit({
-    consumer_key: 'luzRJQdzj4g0L7mjTZRDpo0PO',
-    consumer_secret: 'ABYUGC4a5qA5NCaV6VH5zO3Y3u9RhdGU5IeNiEHdXmz4fdWS34',
-    access_token: '392365525-X2Dh0aOkfp1EQt2R9o2bX17PkW60lmxVKEyTdr22',
-    access_token_secret: 'fFWofKgtDPybsipGkwFSiZWqFb0pVYE59qr6TbLiBhHFY'
-    //callback: '52.24.28.184:3000/index.html'
-});
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    //res.render('fubar', { title: 'Zombo.com' });
-    //res.send('TwInfluence');
-});
-
-router.post('/hashtag', function(req, res) {
+    };
     var query = req.body['querytext'];
+    var hashtag = /#/i;
+    if (query.search(hashtag) != 0) {
+        query = "#".concat(query);
+    }
     result.name = query;
+    buildJSON(query);
+    setTimeout(res.redirect('result.html'), 3000);
+});
 
-    T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function (err, data, response) {
+router.post('/again', function(req, res) {
+    result = {
+        "name": "hashtag",
+        "children": [
+            {
+                "name": "@handle1",
+                "image": "url",
+                "tweet": "text",
+                "retweetNo": 0,
+                "children": [
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"}
+                ]
+            },
+            {
+                "name": "@handle2",
+                "image": "url",
+                "tweet": "text",
+                "retweetNo": 0,
+                "children": [
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"}
+                ]
+            },
+            {
+                "name": "@handle3",
+                "image": "url",
+                "tweet": "text",
+                "retweetNo": 0,
+                "children": [
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"}
+                ]
+            },
+            {
+                "name": "@handle4",
+                "image": "url",
+                "tweet": "text",
+                "retweetNo": 0,
+                "children": [
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"}
+                ]
+            },
+            {
+                "name": "@handle5",
+                "image": "url",
+                "tweet": "text",
+                "retweetNo": 0,
+                "children": [
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"},
+                    {"name": "@handle", "followerNo": 0, "image": "url"}
+                ]
+            }
+        ]
+    };
+    var query = req.body['querytext'];
+    var hashtag = /#/i;
+    if (query.search(hashtag) != 0) {
+        query = "#".concat(query);
+    }
+    result.name = query;
+    buildJSON(query);
+    setTimeout(res.redirect('result.html'), 3000);
+});
+
+var buildJSON = function(query) {
+    T.get('search/tweets', {q: query, lang: 'en', count: 5, result_type: "popular"}, function (err, data, response) {
         if (err) {
             console.log(err);
             console.log("at hashtag query (search/tweets)");
@@ -104,7 +194,7 @@ router.post('/hashtag', function(req, res) {
         var i = 0;
         var l = 0;
         tweets.forEach(function (tweet) {
-            result.children[l].name = tweet.user.screen_name;
+            result.children[l].name = "@".concat(tweet.user.screen_name);
             result.children[l].image = tweet.user.profile_image_url.replace("normal","400x400");
             result.children[l].tweet = tweet.text;
             result.children[l].retweetNo = tweet.retweet_count;
@@ -128,7 +218,7 @@ router.post('/hashtag', function(req, res) {
                                 console.log("at retweeter lookup (users/show");
                             }
                             else {
-                                result.children[k].children[j].name = data3.screen_name;
+                                result.children[k].children[j].name = "@".concat(data3.screen_name);
                                 result.children[k].children[j].followerNo = data3.followers_count;
                                 result.children[k].children[j].image = data3.profile_image_url.replace("normal","400x400");
                                 //sortTopRetweeters(k, data3)
@@ -145,8 +235,7 @@ router.post('/hashtag', function(req, res) {
         //console.log(result);
         //jf.writeFileSync("public/twitter_data2.json", result);
     });
-    res.redirect('result.html');
-});
+};
 
 var sortTopRetweeters = function(resultIndex, curRT) {
     retweeters.push({ "name":curRT.screen_name, "followerNo":curRT.followers_count, "image":curRT.profile_image_url });
