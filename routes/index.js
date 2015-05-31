@@ -108,7 +108,7 @@ router.post('/hashtag', function(req, res) {
         var i = 0;
         var l = 0;
         tweets.forEach(function (tweet) {
-            result.children[l].name = tweet.user.screen_name;
+            result.children[l].name = "@".concat(tweet.user.screen_name);
             result.children[l].image = tweet.user.profile_image_url.replace("normal","400x400");
             result.children[l].tweet = tweet.text;
             result.children[l].retweetNo = tweet.retweet_count;
@@ -149,7 +149,7 @@ router.post('/hashtag', function(req, res) {
         //console.log(result);
         //jf.writeFileSync("public/twitter_data2.json", result);
     });
-    res.redirect('result.html');
+    setTimeout(res.redirect('result.html'), 3000);
 });
 
 var sortTopRetweeters = function(resultIndex, curRT) {
