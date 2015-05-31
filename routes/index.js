@@ -92,9 +92,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/hashtag', function(req, res) {
     var query = req.body['querytext'];
+    var hashtag = /#/i;
+    if (query.search(hashtag) != 0) {
+        query = "#".concat(query);
+    }
     result.name = query;
 
-    T.get('search/tweets', {q: query, count: 5, result_type: "popular"}, function (err, data, response) {
+    T.get('search/tweets', {q: query, lang: 'en', count: 5, result_type: "popular"}, function (err, data, response) {
         if (err) {
             console.log(err);
             console.log("at hashtag query (search/tweets)");
