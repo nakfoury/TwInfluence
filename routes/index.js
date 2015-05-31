@@ -128,7 +128,7 @@ router.post('/hashtag', function(req, res) {
                                 console.log("at retweeter lookup (users/show");
                             }
                             else {
-                                result.children[k].children[j].name = data3.screen_name;
+                                result.children[k].children[j].name = "@".concat(data3.screen_name);
                                 result.children[k].children[j].followerNo = data3.followers_count;
                                 result.children[k].children[j].image = data3.profile_image_url.replace("normal","400x400");
                                 //sortTopRetweeters(k, data3)
