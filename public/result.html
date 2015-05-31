@@ -8,11 +8,20 @@
         <style type="text/css">
             @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
 
+            body {
+                background: -webkit-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* Chrome 10+, Saf5.1+ */
+                background:    -moz-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* FF3.6+ */
+                background:     -ms-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* IE10 */
+                background:      -o-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* Opera 11.10+ */
+                background:         linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* W3C */
+            }
+
             h1 {
                 text-align: center;
                 font-size: 5em;
                 font-family: Righteous;
                 margin: 50px auto 0 auto;
+                color:white;
             }
 
             em {
@@ -28,17 +37,37 @@
             h2 {
                 text-align: center;
                 font-family: Lato;
-                font-weight: 700;
+                font-weight: 400;
                 font-size: 2.2em;
                 margin-top: 1%;
+                color:white;
+            }
+
+            h4 {
+                font-weight:300;
+                text-align: center;
+                marign:0;
+                padding:0;
+                color:white;
             }
 
             /* yasu */
             h5 {
                 font-weight:300;
-                text-align: center;
+                text-align: left;
                 marign:0;
                 padding:0;
+                bckground-color:#d3d3d3;
+            }
+
+            #explanation {
+                max-width:700px;
+                margin:0 auto 1% auto;
+                padding:1%;
+                background-color: #ffffff;
+                border: .5px solid #d3d3d3;
+                border-radius: 10px;
+                opacity:0.6;
             }
 
 
@@ -113,27 +142,27 @@
 
             .node {
                 cursor: pointer;
-                fill-opacity: 0.6;
-                stroke: #079107;
-                stroke-width: 0.5em;
+                fill-opacity: 0.9;
+                /*stroke: #fff;
+                stroke-width: 0.2em;*/
             }
 
             .node--root {
-                fill: #57d757;
-                fill-opacity: 1;
+                fill: #000;
+                fill-opacity: .2;
                 stroke: transparent;
             }
 
             .node--leaf {
-                fill-opacity: 1;
-                stroke: #84e684;
-                stroke-width: 0.2em;
+                fill-opacity: .9;
+                stroke: #fff;
+                stroke-width: 0.1em;
             }
 
             .node:hover {
-                stroke: #079107;
-                stroke-width: 0.8em;
-                fill-opacity: 1;
+                /*stroke: #d3d3d3;
+                stroke-width: 0.3em;*/
+                fill-opacity: .5;
             }
 
             .node--root {
@@ -141,13 +170,13 @@
             }
 
             .node--leaf:hover {
-              stroke: #84e684;
-              stroke-width: 0.5em;
-              fill-opacity: 1;
+              /*stroke: #d3d3d3;
+              stroke-width: 0.2em;*/
+              fill-opacity: .5;
             }
 
             text {
-                fill: white;
+                fill: black;
             }
 
             .handle {
@@ -171,23 +200,8 @@
 
     <body>
         <h1><em>#</em>Influence</h1>
-        <h2>They are the folks driving conversations behind</h2>
-         <div class="span7 text-center">
-        <form class='form-inline' style='margin:2%;' method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
-            <div class="form-group">
-                <label class="sr-only control-label" for="search"></label>
-                <input type="text"  name="querytext" id="search" class="form-control" placeholder="# Type Hashtag!" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Go!" class="btn btn-primary">
-            </div>
-        </form>
-        </div>
-
-        <div class="container" id="vis"></div>
-
-
-
+        <h2>They are the folks driving conversations</h2>
+        <h4>The size of circles represents how they are influential</h4>
 
         <section></section>
         <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -311,8 +325,8 @@
                         var handlenode_r = d.r;
                         return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.7 * handlenode_r) * k + ")"; });
 
-                    image.attr("width", function(d) { return d.r *k * 2; })
-                            .attr("height", function(d) { return d.r *k * 2; });
+                    image.attr("width", function(d) { return d.r * k * 2; })
+                            .attr("height", function(d) { return d.r * k * 2; });
 
                     circle.attr("r", function(d) { return d.r * k; });
                 }
@@ -321,7 +335,19 @@
             d3.select(self.frameElement).style("height", diameter + "px");
         </script>
 
-        <h5>The big circles represent how many times they got retweeted.<br />The size of smaller circles is caluculated by the follower numbers.  </h5>
+        <div id="explanation">
+        <h5><strong>What’s influence?</strong><br />
+            <br />
+            Influence on Twittersphere can be elusive to define due to the limitation of the Twitter API. Our evaluation method is like this.<br />
+            <br />
+            Each time you type a hashtag, the API returns the most popular 100 tweets around the # based on their algorithm. We sort them out <strong>on the basis of the number of retweets</strong> and display the top 5 results as bigger circles. But the smaller circles within each bigger circle are <strong>calculated by their follower numbers</strong>.<br />
+            <br />
+            We acknowledge that our method is far from coherent as for the way of evaluating influence. It’s basically because the Twitter API doesn't track retweets of a retweet. Also, let us add a note of caution, the precision of the number of retweets is somewhat elusive again, as the API doesn’t sum up the number of retweets and edited retweets.
+            <br /><br />
+            Got questions? Email us at <a href="mailto:query@hashtaginfluence.org">query@hashtaginfluence.org</a>.
+        </h5>
+        </div>
+
         <div id="share-button">
             <ul class="share-buttons">
                 <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
