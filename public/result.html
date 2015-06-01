@@ -310,6 +310,8 @@
                 .text(function(d) { return d.name; })
                 .style("font-size", function(d) { return d.r * 0.2 + "px"; });
 
+        var tweetwidth = 200;
+
         var tweet = firstGroup
                 .append("text")
                 .attr("class", "tweet")
@@ -318,7 +320,7 @@
             //.style("display", function(d) { return d.parent === root ? null : "none"; })
                 .text(function(d) { return d.tweet; })
                 .style("font-size", function(d) { return d.r * 0.1 + "px"; })
-                .call(wrap, 200);
+                .call(wrap, tweetwidth);
         //.append("tspan")
         //.attr("x", 0)
         //.attr("y", y)
@@ -347,10 +349,10 @@
                                 .attr("dy", 0);
                 //.text("lalala");
 
-                console.log(words);
+                //console.log(words);
                 while (word = words.pop()) {
                     line.push(word);
-                    console.log(word);
+                    //console.log(word);
                     tspan.text(line.join(" "));
 
                     var trouble = tspan.node().getComputedTextLength();
@@ -360,8 +362,8 @@
                         line.pop();
                         tspan.text(line.join(" "));
                         line = [word];
-                        console.log("hihihi");
-                        console.log(line);
+                        //console.log("hihihi");
+                        //console.log(line);
                         tspan = tweetText.append("tspan")
                                 .attr("x", 0)
                             //.attr("y", y)
@@ -460,32 +462,32 @@
                     console.log("data being appended");
                     console.log(secondnodes[k]);
 
-                    var defTwo = canvas_two.append("defs")
-                            .attr("id", "2ndimgdefs");
+                    var secondGroup = d3.select(canvas_two[0][x]).selectAll('g')
+                            .data(secondnodes[k])
+                            .enter().append('g');
 
-                    var patternTwo = defTwo.append("pattern")
+                    var secondcircle = secondGroup.append('circle')
+                            .attr('cx', function(d) { return 400; })
+                            .attr('cy', function(d) { return 390; })
+                            .attr('r', function(d) { return d.r; })
+                        //.attr('fill', 'white')
+                            .attr("fill", function(d) { return "url(#" + d.name + ")" ; })
+                            .attr('stroke', 'grey');
+
+                    var secondhandle = secondGroup.append("text").attr('x',400).attr('y',400).text(function(d) { return d.name; });
+
+                    var seconddefs = secondGroup.append("defs")
+                            .attr("id", "imgdefs");
+
+                    var secondpattern = seconddefs.append("pattern")
                             .attr("id", function(d) { return d.name; })
                             .attr("height", 1)
                             .attr("width", 1);
 
-                    //console.log("please work");
-                    //console.log(function(d) { return d.name; });
-
-                    var imageTwo = patternTwo.append("svg:image")
+                    var secondimage = secondpattern.append("svg:image")
                             .attr("width", function(d) { return d.r * 2; })
                             .attr("height", function(d) { return d.r * 2; })
-                            .attr("xlink:href", function(d) { return d.retweetimage; });
-
-                    var secondcircle = d3.select(canvas_two[0][x]).selectAll('circle')
-                            .data(secondnodes[k])
-                            .enter().append('circle')
-                            .attr('cx', function(d) { return 400; })
-                            .attr('cy', function(d) { return 390; })
-                            .attr('r', function(d) { return d.r; })
-                            .attr("fill", "white")
-                        //.attr("fill", function(d) { return "url(#" + d.retweetname + ")" ; })
-                            .attr('stroke', 'grey');
-
+                            .attr("xlink:href", function(d) { return d.image; });
                     //var secondtweet = secondcircle.append("text").attr('x',400).attr('y',400).text(function(d) { return d.name; });
 
 
