@@ -8,21 +8,21 @@
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
 
-            body {
-                background: -webkit-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* Chrome 10+, Saf5.1+ */
-                background:    -moz-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* FF3.6+ */
-                background:     -ms-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* IE10 */
-                background:      -o-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* Opera 11.10+ */
-                background:         linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* W3C */
-            }
+        body {
+            background: -webkit-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* Chrome 10+, Saf5.1+ */
+            background:    -moz-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* FF3.6+ */
+            background:     -ms-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* IE10 */
+            background:      -o-linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* Opera 11.10+ */
+            background:         linear-gradient(90deg, #348F50 10%, #56B4D3 90%); /* W3C */
+        }
 
-            h1 {
-                text-align: center;
-                font-size: 5em;
-                font-family: Righteous;
-                margin: 50px auto 0 auto;
-                color:white;
-            }
+        h1 {
+            text-align: center;
+            font-size: 5em;
+            font-family: Righteous;
+            margin: 50px auto 0 auto;
+            color:white;
+        }
 
         em {
             font-style: normal;
@@ -34,47 +34,47 @@
             font-weight:900;
         }
 
-            h2 {
-                text-align: center;
-                font-family: Lato;
-                font-weight: 400;
-                font-size: 2.2em;
-                margin-top: 1%;
-                color:white;
-            }
+        h2 {
+            text-align: center;
+            font-family: Lato;
+            font-weight: 700;
+            font-size: 2.2em;
+            margin-top: 1%;
+            color:white;
+        }
 
-            h4 {
-                font-weight:300;
-                text-align: center;
-                marign:0;
-                padding:0;
-                color:white;
-            }
+        h4 {
+            font-weight:300;
+            text-align: center;
+            marign:0;
+            padding:0;
+            color:white;
+        }
 
-            /* yasu */
-            h5 {
-                font-weight:300;
-                text-align: left;
-                marign:0;
-                padding:0;
-                bckground-color:#d3d3d3;
-            }
+        /* yasu */
+        h5 {
+            font-weight:300;
+            text-align: left;
+            marign:0;
+            padding:0;
+            bckground-color:#d3d3d3;
+        }
 
-            #explanation {
-                max-width:700px;
-                margin:0 auto 1% auto;
-                padding:1%;
-                background-color: #ffffff;
-                border: .5px solid #d3d3d3;
-                border-radius: 10px;
-                opacity:0.6;
-            }
+        #explanation {
+            max-width:700px;
+            margin:0 auto 1% auto;
+            padding:1%;
+            background-color: #ffffff;
+            border: .5px solid #d3d3d3;
+            border-radius: 10px;
+            opacity:0.6;
+        }
 
 
-            ul.share-buttons{
-                list-style: none;
-                padding: 0;
-            }
+        ul.share-buttons{
+            list-style: none;
+            padding: 0;
+        }
 
         ul.share-buttons li{
             display: inline;
@@ -141,44 +141,44 @@
             outline: 1px solid transparent;
         }
 
-            .node {
-                cursor: pointer;
-                fill-opacity: 0.9;
-                /*stroke: #fff;
-                stroke-width: 0.2em;*/
-            }
+        .node {
+            cursor: pointer;
+            fill-opacity: 0.9;
+            /*stroke: #079107;*/
+            /*stroke-width: 0.5em;*/
+        }
 
-            .node--root {
-                fill: #000;
-                fill-opacity: .2;
-                stroke: transparent;
-            }
+        .node--root {
+            fill: #000;
+            fill-opacity: .2;
+            stroke: transparent;
+        }
 
-            .node--leaf {
-                fill-opacity: .9;
-                stroke: #fff;
-                stroke-width: 0.1em;
-            }
+        .node--leaf {
+            fill-opacity: .9;
+            stroke: #fff;
+            stroke-width: 0.1em;
+        }
 
-            .node:hover {
-                /*stroke: #d3d3d3;
-                stroke-width: 0.3em;*/
-                fill-opacity: .5;
-            }
+        .node:hover {
+            /*stroke: #d3d3d3;
+            stroke-width: 0.3em;*/
+            fill-opacity: .5;
+        }
 
-        .node--root, .node--leaf {
+        .node--root {
             pointer-events: none;
         }
 
-            .node--leaf:hover {
-              /*stroke: #d3d3d3;
-              stroke-width: 0.2em;*/
-              fill-opacity: .5;
-            }
+        .node--leaf:hover {
+            /*stroke: #d3d3d3;
+            stroke-width: 0.2em;*/
+            fill-opacity: .5;
+        }
 
-            text {
-                fill: black;
-            }
+        text {
+            fill: black;
+        }
 
         .handle {
             font-family: Lato;
@@ -201,7 +201,9 @@
 
 <body>
 <h1><em>#</em>Influence</h1>
-<h2>They are the folks driving conversations behind</h2>
+<h2>They are the folks driving conversations</h2>
+<h4>The size of circles represents how they are influential</h4>
+
 <div class="span7 text-center">
     <form class='form-inline' style='margin:2%;' method='post' action="hashtag"><input type='hidden' name='form-name' value='form 1' />
         <div class="form-group">
@@ -213,6 +215,8 @@
         </div>
     </form>
 </div>
+
+<!--<div class="container" id="vis"></div>-->
 
 <section></section>
 
@@ -227,377 +231,384 @@
             .range(["#84e684", "#079107"])
             .interpolate(d3.interpolateHcl);
 
-            var pack = d3.layout.pack()
-                    .padding(2)
-                    .size([diameter - margin, diameter - margin])
-                    .value(function(d) { return d.followerNo; })
+    var pack = d3.layout.pack()
+            .padding(2)
+            .size([diameter - margin, diameter - margin])
+            .value(function(d) { return d.retweetNo; });
 
-            var svgContainer = d3.select("section").append("svg")
-                    .attr("width", diameter)
-                    .attr("height", diameter)
-                    .append("g")
-                    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+    var svgContainer = d3.select("section").append("svg")
+            .attr("width", diameter)
+            .attr("height", diameter)
+            .append("g")
+            .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-            d3.json("twitter_data.json", function(error, root) {
-                if (error) return console.error(error);
 
-                console.log(root);
 
-                var second_inf = JSON.parse(JSON.stringify(root));;
+    d3.json("twitter_data.json", function(error, root) {
+        if (error) return console.error(error);
 
-                var first_inf = new Array();
+        console.log(root);
 
-                for (var i = 0; i < root["children"].length; i++)
-                {
-                    /*first_inf.push(
-                     {
-                     retweetNo: root["children"][i]["retweetNo"]
-                     });*/
+        var second_inf = JSON.parse(JSON.stringify(root));;
 
-                    delete root["children"][i].children; //THIS LINE MAKES THE IMAGE NOT VISIBLE!!
+        var first_inf = new Array();
 
-                }
+        for (var i = 0; i < root["children"].length; i++)
+        {
+            /*first_inf.push(
+             {
+             retweetNo: root["children"][i]["retweetNo"]
+             });*/
 
-                var viz_root = {name: "root", children : first_inf}; //can change root to hashtag name, if needed
+            delete root["children"][i].children; //THIS LINE MAKES THE IMAGE NOT VISIBLE!!
 
-                //console.log(viz_root);
-                //console.log(root);
-                
-                var focus = root,
-                        nodes = pack.nodes(root),
-                        view;
+        }
 
-                //console.log(nodes);
+        var viz_root = {name: "root", children : first_inf}; //can change root to hashtag name, if needed
 
-                //CHANGE MADE!
-                nodes.shift();
+        //console.log(viz_root);
+        //console.log(root);
 
-                //TODO: KEEP THIS CHANGE WHEN MERGING WITH JIAS FILE
-                var firstGroup = svgContainer.selectAll('g')
-                        .data(nodes)
-                        .enter().append('g');
+        var focus = root,
+                nodes = pack.nodes(root),
+                view;
 
-                var defs = firstGroup.append("defs")
-                        .attr("id", "imgdefs");
-                
-                var pattern = defs.append("pattern")
-                        .attr("id", function(d) { return d.name; })
-                        .attr("height", 1)
-                        .attr("width", 1);
+        //console.log(nodes);
 
-                var image = pattern.append("svg:image")
-                        .attr("width", function(d) { return d.r * 2; })
-                        .attr("height", function(d) { return d.r * 2; })
-                        .attr("xlink:href", function(d) { return d.image; });
+        //CHANGE MADE!
+        nodes.shift();
 
-                var circle = firstGroup.append("circle")
-                        .attr("fill", function(d) { return "url(#" + d.name + ")" ; })
-                    //.attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-                    //.style("fill", function(d) { return d.children ? color(d.depth) : null; })
-                        .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
-                var handle = firstGroup.append("text")
-                        .attr("class", "handle")
-                        .style ("text-anchor", "middle")
-                    //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-                    //.style("display", function(d) { return d.parent === root ? null : "none"; })
-                        .text(function(d) { return d.name; })
-                        .style("font-size", function(d) { return d.r * 0.2 + "px"; });
+        //TODO: KEEP THIS CHANGE WHEN MERGING WITH JIAS FILE
+        var firstGroup = svgContainer.selectAll('g')
+                .data(nodes)
+                .enter().append('g');
 
-                var tweet = firstGroup
-                        .append("text")
-                        .attr("class", "tweet")
-                        .style ("text-anchor", "middle")
-                    //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-                    //.style("display", function(d) { return d.parent === root ? null : "none"; })
-                        .text(function(d) { return d.tweet; })
-                        .style("font-size", function(d) { return d.r * 0.1 + "px"; })
-                        .call(wrap, 200);
-                //.append("tspan")
-                //.attr("x", 0)
-                //.attr("y", y)
-                //.attr("dy", 50)
-                //.attr("dx", 50)
+        var defs = firstGroup.append("defs")
+                .attr("id", "imgdefs");
+
+        var pattern = defs.append("pattern")
+                .attr("id", function(d) { return d.name; })
+                .attr("height", 1)
+                .attr("width", 1);
+
+        var image = pattern.append("svg:image")
+                .attr("width", function(d) { return d.r * 2; })
+                .attr("height", function(d) { return d.r * 2; })
+                .attr("xlink:href", function(d) { return d.image; });
+
+        var circle = firstGroup.append("circle")
+                .attr("fill", function(d) { return "url(#" + d.name + ")" ; })
+            //.attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+            //.style("fill", function(d) { return d.children ? color(d.depth) : null; })
+                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
+        var handle = firstGroup.append("text")
+                .attr("class", "handle")
+                .style ("text-anchor", "middle")
+            //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+            //.style("display", function(d) { return d.parent === root ? null : "none"; })
+                .text(function(d) { return d.name; })
+                .style("font-size", function(d) { return d.r * 0.2 + "px"; });
+
+        var tweet = firstGroup
+                .append("text")
+                .attr("class", "tweet")
+                .style ("text-anchor", "middle")
+            //.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+            //.style("display", function(d) { return d.parent === root ? null : "none"; })
+                .text(function(d) { return d.tweet; })
+                .style("font-size", function(d) { return d.r * 0.1 + "px"; })
+                .call(wrap, 200);
+        //.append("tspan")
+        //.attr("x", 0)
+        //.attr("y", y)
+        //.attr("dy", 50)
+        //.attr("dx", 50)
+        //.text("lalala");
+
+        function wrap(tweet, width) {
+            tweet.each(function() {
+                var tweetText = d3.select(this),
+                        words = tweetText.text().split(/\s+/).reverse(),
+                        word,
+                        line = [],
+                //lineNumber = 0,
+                //lineHeight = 1.1, // ems
+                //y = 10,
+                        dx = function(d) { return 0; },
+                        dy = function(d) { return d.r/8; },
+
+                        tspan = tweetText
+                                .text(null)
+                                .append("tspan")
+                            //.attr("x", 0)
+                            //.attr("y", y)
+                                .attr("dx", dx)
+                                .attr("dy", 0);
                 //.text("lalala");
 
-                function wrap(tweet, width) {
-                    tweet.each(function() {
-                        var tweetText = d3.select(this),
-                                words = tweetText.text().split(/\s+/).reverse(),
-                                word,
-                                line = [],
-                        //lineNumber = 0,
-                        //lineHeight = 1.1, // ems
-                        //y = 10,
-                                dx = function(d) { return 0; },
-                                dy = function(d) { return d.r/8; },
+                console.log(words);
+                while (word = words.pop()) {
+                    line.push(word);
+                    console.log(word);
+                    tspan.text(line.join(" "));
 
-                                tspan = tweetText
-                                        .text(null)
-                                        .append("tspan")
-                                    //.attr("x", 0)
-                                    //.attr("y", y)
-                                        .attr("dx", dx)
-                                        .attr("dy", 0);
-                        //.text("lalala");
+                    var trouble = tspan.node().getComputedTextLength();
+                    //console.log(trouble);
 
-                        console.log(words);
-                        while (word = words.pop()) {
-                            line.push(word);
-                            console.log(word);
-                            tspan.text(line.join(" "));
-
-                            var trouble = tspan.node().getComputedTextLength();
-                            //console.log(trouble);
-
-                            if (tspan.node().getComputedTextLength() > width) {
-                                line.pop();
-                                tspan.text(line.join(" "));
-                                line = [word];
-                                console.log("hihihi");
-                                console.log(line);
-                                tspan = tweetText.append("tspan")
-                                        .attr("x", 0)
-                                    //.attr("y", y)
-                                        .attr("dx", dx )
-                                        .attr("dy", dy )
-                                        .text(word);
-                            }
-                        }
-                    })
-                };
-
-
-                var canvas_two = firstGroup.append("svg")
-                        .attr("class", "secondcanvas")
-                    //.attr('x', function(d) { return d.x - d.r/1.4142 - 400; }) //check if wrong...
-                    //.attr('y', function(d) { return d.y - 400; })
-                        .attr('width', function(d) { return 2*d.r; })
-                        .attr('height', function(d) { return d.r; })
-                        .attr('name', function(d) { return d.tweet; })
-                        .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
-
-                console.log(root);
-                console.log("second1");
-                console.log(second_inf);
-                console.log(second_inf["children"]);
-
-
-                /*for (firstindex in second_inf["children"])
-                 {
-                 console.log(second_inf["children"][firstindex]["tweet"]);
-                 }*/
-
-                var arrayOfChildren = []; //an array of json objects (each with children array and each of which is a root node at the second level). also has property, tweet, from parent.
-
-                for (var j = 0; j < second_inf.children.length; j++)
-                {
-                    //console.log("AOCE");
-                    //second_inf["children"][j]["children"].tweet = "abc";
-                    //var x =
-                    //console.log(second_inf["children"][j]["children"]);
-
-                    /*var parent = {tweet: second_inf["children"][j]["tweet"],
-                     children: []};
-
-                     for (var m = 0; m < second_inf["children"][j]["children"].length; m++)
-                     {
-                     second_inf["children"][j]["children"][m].tweet = second_inf["children"][j]["tweet"];
-                     parent["children"].push(second_inf["children"][j]["children"][m]);
-                     //console.log(second_inf["children"][j]["children"][m]);
-                     }*/
-
-
-                    var parent = second_inf["children"][j];
-                    parent.tweet = second_inf["children"][j]["tweet"];
-
-                    arrayOfChildren.push(parent);
-
-                    //console.log(second_inf["children"][j].tweet);
-                    //arrayOfChildren.push(second_inf["children"][j].children);
-                }
-                console.log("ARRAYOFCHILDREN");
-                console.log(arrayOfChildren);
-
-
-                console.log("CANVASTWO");
-                console.log(canvas_two);
-                console.log(canvas_two[0].length);
-                console.log(arrayOfChildren.length);
-
-                var secondpack = [];
-                var secondnodes = [];
-
-                for (var x = 0; x < canvas_two[0].length; x++)
-                {
-                    console.log("INLOOP");
-                    console.log(canvas_two[0][x])
-
-                    for (var k = 0; k < arrayOfChildren.length; k++)
-                    {
-
-                        if (arrayOfChildren[k].tweet === canvas_two[0][x].getAttribute("name"))
-                        {
-                            console.log("INIF");
-                            console.log(arrayOfChildren[k].tweet);
-                            secondpack[k] = d3.layout.pack()
-                                    .value(function(d) { return d.followerNo; })
-                                    .size([canvas_two[0][x].getAttribute("width"), canvas_two[0][x].getAttribute("height")])
-                                    .padding(2);
-
-                            secondnodes[k] = secondpack[k].nodes(arrayOfChildren[k]);
-
-                            secondnodes[k].shift();
-
-                            console.log("2nd nodes");
-                            console.log(secondnodes);
-                            console.log(k);
-                            console.log("data being appended");
-                            console.log(secondnodes[k]);
-
-                            var defTwo = canvas_two.append("defs")
-                                    .attr("id", "2ndimgdefs");
-
-                            var patternTwo = defTwo.append("pattern")
-                                    .attr("id", function(d) { return d.name; })
-                                    .attr("height", 1)
-                                    .attr("width", 1);
-
-                            //console.log("please work");
-                            //console.log(function(d) { return d.name; });
-
-                            var imageTwo = patternTwo.append("svg:image")
-                                    .attr("width", function(d) { return d.r * 2; })
-                                    .attr("height", function(d) { return d.r * 2; })
-                                    .attr("xlink:href", function(d) { return d.retweetimage; });
-
-                            var secondcircle = d3.select(canvas_two[0][x]).selectAll('circle')
-                                    .data(secondnodes[k])
-                                    .enter().append('circle')
-                                    .attr('cx', function(d) { return 400; })
-                                    .attr('cy', function(d) { return 390; })
-                                    .attr('r', function(d) { return d.r; })
-                                    .attr("fill", "white")
-                                //.attr("fill", function(d) { return "url(#" + d.retweetname + ")" ; })
-                                    .attr('stroke', 'grey');
-
-                            //var secondtweet = secondcircle.append("text").attr('x',400).attr('y',400).text(function(d) { return d.name; });
-
-
-                        }
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        console.log("hihihi");
+                        console.log(line);
+                        tspan = tweetText.append("tspan")
+                                .attr("x", 0)
+                            //.attr("y", y)
+                                .attr("dx", dx )
+                                .attr("dy", dy )
+                                .text(word);
                     }
                 }
+            })
+        };
 
-                //CODE ADAPTED FROM: http://bl.ocks.org/seliopou/4127259
+        var canvas_two = firstGroup.append("svg")
+                .attr("class", "secondcanvas")
+            //.attr('x', function(d) { return d.x - d.r/1.4142 - 400; }) //check if wrong...
+            //.attr('y', function(d) { return d.y - 400; })
+                .attr('width', function(d) { return 2*d.r; })
+                .attr('height', function(d) { return d.r; })
+                .attr('name', function(d) { return d.tweet; })
+                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
+        console.log(root);
+        console.log("second1");
+        console.log(second_inf);
+        console.log(second_inf["children"]);
 
 
-                var node = svgContainer.selectAll("circle");
+        /*for (firstindex in second_inf["children"])
+         {
+         console.log(second_inf["children"][firstindex]["tweet"]);
+         }*/
 
-                var tweetnode = svgContainer.selectAll(".tweet");
+        var arrayOfChildren = []; //an array of json objects (each with children array and each of which is a root node at the second level). also has property, tweet, from parent.
 
-                var handlenode = svgContainer.selectAll(".handle");
+        for (var j = 0; j < second_inf.children.length; j++)
+        {
+            //console.log("AOCE");
+            //second_inf["children"][j]["children"].tweet = "abc";
+            //var x =
+            //console.log(second_inf["children"][j]["children"]);
 
-                var secondcanvasnode = svgContainer.selectAll(".secondcanvas");
+            /*var parent = {tweet: second_inf["children"][j]["tweet"],
+             children: []};
 
-                //var imagenode = svgContainer.selectAll("image");
+             for (var m = 0; m < second_inf["children"][j]["children"].length; m++)
+             {
+             second_inf["children"][j]["children"][m].tweet = second_inf["children"][j]["tweet"];
+             parent["children"].push(second_inf["children"][j]["children"][m]);
+             //console.log(second_inf["children"][j]["children"][m]);
+             }*/
 
-                d3.select("body")
-                        .style("background-color", "white")
-                        .on("click", function() { zoom(root); });
 
-                zoomTo([root.x, root.y, root.r * 2 + margin]);
+            var parent = second_inf["children"][j];
+            parent.tweet = second_inf["children"][j]["tweet"];
 
-                function zoom(d) {
-                    //console.log(d);
-                    var focus0 = focus; focus = d;
+            arrayOfChildren.push(parent);
 
-                    var transition = d3.transition()
-                            .duration(d3.event.altKey ? 7500 : 750)
-                            .tween("zoom", function(d) {
-                                var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-                                return function(t) { zoomTo(i(t)); };
-                            });
+            //console.log(second_inf["children"][j].tweet);
+            //arrayOfChildren.push(second_inf["children"][j].children);
+        }
+        console.log("ARRAYOFCHILDREN");
+        console.log(arrayOfChildren);
+
+
+        console.log("CANVASTWO");
+        console.log(canvas_two);
+        console.log(canvas_two[0].length);
+        console.log(arrayOfChildren.length);
+
+        var secondpack = [];
+        var secondnodes = [];
+
+        for (var x = 0; x < canvas_two[0].length; x++)
+        {
+            console.log("INLOOP");
+            console.log(canvas_two[0][x])
+
+            for (var k = 0; k < arrayOfChildren.length; k++)
+            {
+
+                if (arrayOfChildren[k].tweet === canvas_two[0][x].getAttribute("name"))
+                {
+                    console.log("INIF");
+                    console.log(arrayOfChildren[k].tweet);
+                    secondpack[k] = d3.layout.pack()
+                            .value(function(d) { return d.followerNo; })
+                            .size([canvas_two[0][x].getAttribute("width"), canvas_two[0][x].getAttribute("height")])
+                            .padding(2);
+
+                    secondnodes[k] = secondpack[k].nodes(arrayOfChildren[k]);
+
+                    secondnodes[k].shift();
+
+                    console.log("2nd nodes");
+                    console.log(secondnodes);
+                    console.log(k);
+                    console.log("data being appended");
+                    console.log(secondnodes[k]);
+
+                    var defTwo = canvas_two.append("defs")
+                            .attr("id", "2ndimgdefs");
+
+                    var patternTwo = defTwo.append("pattern")
+                            .attr("id", function(d) { return d.name; })
+                            .attr("height", 1)
+                            .attr("width", 1);
+
+                    //console.log("please work");
+                    //console.log(function(d) { return d.name; });
+
+                    var imageTwo = patternTwo.append("svg:image")
+                            .attr("width", function(d) { return d.r * 2; })
+                            .attr("height", function(d) { return d.r * 2; })
+                            .attr("xlink:href", function(d) { return d.retweetimage; });
+
+                    var secondcircle = d3.select(canvas_two[0][x]).selectAll('circle')
+                            .data(secondnodes[k])
+                            .enter().append('circle')
+                            .attr('cx', function(d) { return 400; })
+                            .attr('cy', function(d) { return 390; })
+                            .attr('r', function(d) { return d.r; })
+                            .attr("fill", "white")
+                        //.attr("fill", function(d) { return "url(#" + d.retweetname + ")" ; })
+                            .attr('stroke', 'grey');
+
+                    //var secondtweet = secondcircle.append("text").attr('x',400).attr('y',400).text(function(d) { return d.name; });
+
+
                 }
-
-                function zoomTo(v) {
-
-                    var k = diameter / v[2]; view = v;
-
-                    node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-
-                    tweetnode.attr("transform", function(d) {
-                        var tweetnode_x = d.x - v[0];
-                        var tweetnode_y = d.y - v[1];
-                        var tweetnode_r = d.r;
-                        return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.4 * tweetnode_r) * k + ")"; });
-
-                    tweetnode.style("font-size", function(d) { return d.r * 0.1 * k + "px"; });
-
-                    handlenode.attr("transform", function(d) {
-                        var handlenode_x = d.x - v[0];
-                        var handlenode_y = d.y - v[1];
-                        var handlenode_r = d.r;
-                        return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.7 * handlenode_r) * k + ")"; });
-
-                    handlenode.style("font-size", function(d) { return d.r * 0.2 * k + "px"; });
-
-                    image.attr("width", function(d) { return d.r *k * 2; })
-                            .attr("height", function(d) { return d.r *k * 2; });
-
-                    circle.attr("r", function(d) { return d.r * k; });
-
-
-                    //secondcircle.attr("transform", function(d) { return "translate(" + (d.x - v[0] - d.r) * k + "," + (d.y - v[1]) * k + ")"; });
-
-                    canvas_two.attr("transform", function(d) {
-                        var canvas_two_x = d.x - v[0];
-                        var canvas_two_y = d.y - v[1];
-                        var canvas_two_r = d.r - v[2];
-                        return "translate(" + (canvas_two_x - d.r - margin/2) * k + "," + canvas_two_y * k + ")"; });
-
-                    secondcanvasnode.attr('width', function(d) { return 2* d.r *k; })
-                            .attr('height', function(d) { return d.r * k; });
-
-                    secondcircle.attr("transform", function(d) {
-                        var secondcircle_x = d.x - v[0];
-                        var secondcircle_y = d.y - v[1];
-                        return "translate(" + (secondcircle_x - d.r - margin/2) * k + "," + secondcircle_y * k + ")"; });
-
-                    secondcircle.attr('r', function(d) { return d.r * k; })
-                            .attr('cx', function(d) { return 400 * k; })
-                            .attr('cy', function(d) { return 390 * k; });
-
-
-                }
+            }
+        }
 
 
 
-            });
+
+
+
+        //CODE ADAPTED FROM: http://bl.ocks.org/seliopou/4127259
+
+
+        var node = svgContainer.selectAll("circle");
+
+        var tweetnode = svgContainer.selectAll(".tweet");
+
+        var handlenode = svgContainer.selectAll(".handle");
+
+        var secondcanvasnode = svgContainer.selectAll(".secondcanvas");
+
+        //var imagenode = svgContainer.selectAll("image");
+
+        d3.select("body")
+                .style("background-color", "white")
+                .on("click", function() { zoom(root); });
+
+        zoomTo([root.x, root.y, root.r * 2 + margin]);
+
+        function zoom(d) {
+            //console.log(d);
+            var focus0 = focus; focus = d;
+
+            var transition = d3.transition()
+                    .duration(d3.event.altKey ? 7500 : 750)
+                    .tween("zoom", function(d) {
+                        var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+                        return function(t) { zoomTo(i(t)); };
+                    });
+        }
+
+        function zoomTo(v) {
+
+            var k = diameter / v[2]; view = v;
+
+            node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+
+            tweetnode.attr("transform", function(d) {
+                var tweetnode_x = d.x - v[0];
+                var tweetnode_y = d.y - v[1];
+                var tweetnode_r = d.r;
+                return "translate(" + tweetnode_x * k + "," + (tweetnode_y - 0.4 * tweetnode_r) * k + ")"; });
+
+            tweetnode.style("font-size", function(d) { return d.r * 0.1 * k + "px"; });
+
+            handlenode.attr("transform", function(d) {
+                var handlenode_x = d.x - v[0];
+                var handlenode_y = d.y - v[1];
+                var handlenode_r = d.r;
+                return "translate(" + handlenode_x * k + "," + (handlenode_y - 0.7 * handlenode_r) * k + ")"; });
+
+            handlenode.style("font-size", function(d) { return d.r * 0.2 * k + "px"; });
+
+            image.attr("width", function(d) { return d.r *k * 2; })
+                    .attr("height", function(d) { return d.r *k * 2; });
+
+            circle.attr("r", function(d) { return d.r * k; });
+
+
+            //secondcircle.attr("transform", function(d) { return "translate(" + (d.x - v[0] - d.r) * k + "," + (d.y - v[1]) * k + ")"; });
+
+            canvas_two.attr("transform", function(d) {
+                var canvas_two_x = d.x - v[0];
+                var canvas_two_y = d.y - v[1];
+                var canvas_two_r = d.r - v[2];
+                return "translate(" + (canvas_two_x - d.r - margin/2) * k + "," + canvas_two_y * k + ")"; });
+
+            secondcanvasnode.attr('width', function(d) { return 2* d.r *k; })
+                    .attr('height', function(d) { return d.r * k; });
+
+            secondcircle.attr("transform", function(d) {
+                var secondcircle_x = d.x - v[0];
+                var secondcircle_y = d.y - v[1];
+                return "translate(" + (secondcircle_x - d.r - margin/2) * k + "," + secondcircle_y * k + ")"; });
+
+            secondcircle.attr('r', function(d) { return d.r * k; })
+                    .attr('cx', function(d) { return 400 * k; })
+                    .attr('cy', function(d) { return 390 * k; });
+
+
+        }
+
+
+
+    });
 
     d3.select(self.frameElement).style("height", diameter + "px");
 </script>
 
-        <div id="explanation">
-        <h5><strong>What’s influence?</strong><br />
-            <br />
-            Influence on Twittersphere can be elusive to define due to the limitation of the Twitter API. Our evaluation method is like this.<br />
-            <br />
-            Each time you type a hashtag, the API returns the most popular 100 tweets around the # based on their algorithm. We sort them out <strong>on the basis of the number of retweets</strong> and display the top 5 results as bigger circles. But the smaller circles within each bigger circle are <strong>calculated by their follower numbers</strong>.<br />
-            <br />
-            We acknowledge that our method is far from coherent as for the way of evaluating influence. It’s basically because the Twitter API doesn't track retweets of a retweet. Also, let us add a note of caution, the precision of the number of retweets is somewhat elusive again, as the API doesn’t sum up the number of retweets and edited retweets.
-            <br /><br />
-            Got questions? Email us at <a href="mailto:query@hashtaginfluence.org">query@hashtaginfluence.org</a>.
-        </h5>
-        </div>
+<div id="explanation">
+    <h5><strong>What’s influence?</strong><br />
+        <br />
+        Influence on Twittersphere can be elusive to define due to the limitation of the Twitter API. Our evaluation method is like this.<br />
+        <br />
+        Each time you type a hashtag, the API returns the most popular 100 tweets around the # based on their algorithm. We sort them out <strong>on the basis of the number of retweets</strong> and display the top 5 results as bigger circles. But the smaller circles within each bigger circle are <strong>calculated by their follower numbers</strong>.<br />
+        <br />
+        We acknowledge that our method is far from coherent as for the way of evaluating influence. It’s basically because the Twitter API doesn't track retweets of a retweet. Also, let us add a note of caution, the precision of the number of retweets is somewhat elusive again, as the API doesn’t sum up the number of retweets and edited retweets.
+        <br /><br />
+        Got questions? Email us at <a href="mailto:query@hashtaginfluence.org">query@hashtaginfluence.org</a>.
+    </h5>
+</div>
 
-        <div id="share-button">
-            <ul class="share-buttons">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
-                <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
-                <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
-                <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
-                <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
-                <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
-            </ul>
-        </div>
-    </body>
-  </html>
+<div id="share-button">
+    <ul class="share-buttons">
+        <li><a href="https://www.facebook.com/sharer/sharer.php?u=&t=" title="Share on Facebook" target="_blank"><img src="images/flat_web_icon_set/Social_Icons/facebook.png"></a></li>
+        <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet"><img src="images/flat_web_icon_set/Social_Icons/twitter.png"></a></li>
+        <li><a href="https://plus.google.com/share?url=" target="_blank" title="Share on Google+"><img src="images/flat_web_icon_set/Social_Icons/g+.png"></a></li>
+        <li><a href="http://www.tumblr.com/share?v=3&u=&t=&s=" target="_blank" title="Post to Tumblr"><img src="images/flat_web_icon_set/Social_Icons/tumblr.png"></a></li>
+        <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it"><img src="images/flat_web_icon_set/Social_Icons/pinterest.png"></a></li>
+        <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn"><img src="images/flat_web_icon_set/Social_Icons/linkedin.png"></a></li>
+    </ul>
+</div>
+</body>
+</html>
