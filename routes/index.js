@@ -16,10 +16,9 @@ var T = new Twit({
 });
 
 /* GET home page. */
-//router.get('/', function(req, res, next) {
-//    //res.render('fubar', { title: 'Zombo.com' });
-//    //res.send('TwInfluence');
-//});
+router.get('/', function(req, res, next) {
+    res.send('index.html');
+});
 
 router.post('/hashtag', function(req, res) {
     result = {
@@ -98,8 +97,16 @@ router.post('/hashtag', function(req, res) {
         query = "#".concat(query);
     }
     result.name = query;
-    buildJSON(query);
-    setTimeout(res.redirect('result.html'), 3000);
+    var m = 0;
+    buildJSON(query, m);
+    //while(true) {
+    //    if (m >=25) {
+    //        console.log(m);
+    //        break;
+    //    }
+    //}
+    console.log(m);
+    res.redirect('result.html');
 });
 
 router.post('/again', function(req, res) {
@@ -183,7 +190,7 @@ router.post('/again', function(req, res) {
     setTimeout(res.redirect('result.html'), 3000);
 });
 
-var buildJSON = function(query) {
+var buildJSON = function(query, m) {
     T.get('search/tweets', {q: query, lang: 'en', count: 5, result_type: "popular"}, function (err, data, response) {
         if (err) {
             console.log(err);
@@ -199,7 +206,7 @@ var buildJSON = function(query) {
             result.children[l].tweet = tweet.text;
             result.children[l].retweetNo = tweet.retweet_count;
             //loadRetweeters(tweet.id_str, result, i);
-            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 5, stringify_ids: true}, function(err, data2, response) {
+            T.get('statuses/retweeters/ids', {id: tweet.id_str, count: 100, stringify_ids: true}, function(err, data2, response) {
                 if (err) {
                     console.log(err);
                     console.log("at retweeter list query (statuses/retweeters/ids)");
@@ -209,24 +216,51 @@ var buildJSON = function(query) {
                     var dict = [];
                     var j = 0;
                     var k = i;
-                    var m = 0;
                     retweeters = [];
-                    RTIDs.forEach(function (RTID) {
-                        T.get('users/show', {user_id: RTID}, function (err, data3, response) {
-                            if (err) {
-                                console.log(err);
-                                console.log("at retweeter lookup (users/show");
-                            }
-                            else {
-                                result.children[k].children[j].name = "@".concat(data3.screen_name);
-                                result.children[k].children[j].followerNo = data3.followers_count;
-                                result.children[k].children[j].image = data3.profile_image_url.replace("normal","400x400");
-                                //sortTopRetweeters(k, data3)
-                            }
-                            jf.writeFileSync("public/twitter_data.json", result);
+
+                    T.get('users/lookup', { user_id:RTIDs, include_entities:false }, function(err, data3, response) {
+                        if (err) {
+                            console.log(err);
+                            console.log("at retweeter lookup (users/lookup)");
+                        }
+                        else {
+                            data3.forEach(function (user) {
+                                retweeters.push({
+                                    "name": "@".concat(user.screen_name),
+                                    "followerNo": user.followers_count,
+                                    "image": user.profile_image_url.replace("normal", "400x400")
+                                });
+                                retweeters.sort(function (a, b) {
+                                    return (b.followerNo - a.followerNo);
+                                });
+                                for (var n = 0; (n < retweeters.length) && (n < 5); n++) {
+                                    result.children[k].children[n] = retweeters[n];
+                                }
+                            });
                             j++;
-                        });
+                            m++;
+                            jf.writeFileSync("public/twitter_data.json", result);
+                        }
                     });
+
+                    //RTIDs.forEach(function (RTID) {
+                    //    T.get('users/show', {user_id: RTID}, function (err, data3, response) {
+                    //        if (err) {
+                    //            console.log(err);
+                    //            console.log("at retweeter lookup (users/show");
+                    //        }
+                    //        else {
+                    //            retweeters[l].push({ "name":"@".concat(data3.screen_name), "followerNo":data3.followers_count, "image":data3.profile_image_url.replace("normal","400x400") });
+                    //            //result.children[k].children[j].name = "@".concat(data3.screen_name);
+                    //            //result.children[k].children[j].followerNo = data3.followers_count;
+                    //            //result.children[k].children[j].image = data3.profile_image_url.replace("normal","400x400");
+                    //            sortTopRetweeters(k, l)
+                    //        }
+                    //        jf.writeFileSync("public/twitter_data.json", result);
+                    //        j++;
+                    //        m++;
+                    //    });
+                    //});
                 }
                 i++;
             });
@@ -237,13 +271,13 @@ var buildJSON = function(query) {
     });
 };
 
-var sortTopRetweeters = function(resultIndex, curRT) {
-    retweeters.push({ "name":curRT.screen_name, "followerNo":curRT.followers_count, "image":curRT.profile_image_url });
-    retweeters.sort(function(a,b) {
+var sortTopRetweeters = function(resultIndex, retweetersIndex) {
+    retweeters.push({ "name":"@".concat(curRT.screen_name), "followerNo":curRT.followers_count, "image":profile_image_url.replace("normal","400x400") });
+    retweeters[retweetersIndex].sort(function(a,b) {
         return (b.followerNo - a.followerNo);
     });
-    for (var n=0; (n < retweeters.length) && n < 5; n++) {
-        result.children[resultIndex].children[n] = retweeters[n];
+    for (var n=0; (n < retweeters[retweetersIndex].length) && n < 5; n++) {
+        result.children[resultIndex].children[n] = retweeters[retweetersIndex][n];
     }
 };
 
