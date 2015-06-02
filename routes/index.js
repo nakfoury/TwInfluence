@@ -242,43 +242,12 @@ var buildJSON = function(query, m) {
                             jf.writeFileSync("public/twitter_data.json", result);
                         }
                     });
-
-                    //RTIDs.forEach(function (RTID) {
-                    //    T.get('users/show', {user_id: RTID}, function (err, data3, response) {
-                    //        if (err) {
-                    //            console.log(err);
-                    //            console.log("at retweeter lookup (users/show");
-                    //        }
-                    //        else {
-                    //            retweeters[l].push({ "name":"@".concat(data3.screen_name), "followerNo":data3.followers_count, "image":data3.profile_image_url.replace("normal","400x400") });
-                    //            //result.children[k].children[j].name = "@".concat(data3.screen_name);
-                    //            //result.children[k].children[j].followerNo = data3.followers_count;
-                    //            //result.children[k].children[j].image = data3.profile_image_url.replace("normal","400x400");
-                    //            sortTopRetweeters(k, l)
-                    //        }
-                    //        jf.writeFileSync("public/twitter_data.json", result);
-                    //        j++;
-                    //        m++;
-                    //    });
-                    //});
                 }
                 i++;
             });
             l++;
         });
-        //console.log(result);
-        //jf.writeFileSync("public/twitter_data2.json", result);
     });
-};
-
-var sortTopRetweeters = function(resultIndex, retweetersIndex) {
-    retweeters.push({ "name":"@".concat(curRT.screen_name), "followerNo":curRT.followers_count, "image":profile_image_url.replace("normal","400x400") });
-    retweeters[retweetersIndex].sort(function(a,b) {
-        return (b.followerNo - a.followerNo);
-    });
-    for (var n=0; (n < retweeters[retweetersIndex].length) && n < 5; n++) {
-        result.children[resultIndex].children[n] = retweeters[retweetersIndex][n];
-    }
 };
 
 module.exports = router;
