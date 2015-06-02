@@ -269,7 +269,10 @@
                 .append("circle")
                 .attr("fill", function(d) { return "url(#" + d.name + ")" ; })
                 .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+            //.style("display", function(d) { return (d.parent === root || d === root) ? null : "none"; })
             // CONTROLS WHAT GETS SEEN AT WHAT ZOOM LEVEL//
+                .style("display", function(d) { return (d.parent === root) ? "inline" : "none"; })
+
             // .style("fill-opacity", function(d) { return d.parent ? d.children ? 0.5 : "node node--leaf" : "node node--root";})
             // .style("stroke", function(d) { return d.parent ? d.children ? "red" : "node node--leaf" : "node node--root";})
             // .style("stroke-width", function(d) { return d.parent ? d.children ? 4 : "node node--leaf" : "node node--root";})
@@ -285,6 +288,7 @@
                 .style ("text-anchor", "middle")
             //.attr("fill", "green")
             // CONTROLS WHAT GETS SEEN AT WHAT ZOOM LEVEL//
+                .style("display", function(d) { return (d.parent === root) ? "inline" : "none"; })
             // .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             // //.style("fill", function(d) { return d.parent === root ? "green" : "blue"; })
             // .style("display", function(d) { return d.parent === root ? null : "none"; })
@@ -315,6 +319,8 @@
             //.style("font-size", function(d) { console.log("fontsize"); console.log(d.r); return d.r * 0.01; })
                 .style ("text-anchor", "middle")
                 .style("font-size", function(d) { radii = d.r; /*console.log(radii);*/ return d.r * 1/140 + "em"; })
+                .style("display", function(d) { return (d.parent === root) ? "inline" : "none"; })
+
             //.style("font-size", function(d) { console.log("HEREEEEE"); console.log(d.r.toString() + "px"); return "20px"; /*var temp = d.r * .1; return temp.toString();*/ })
             //.style("font")
                 .each(function(d) {
@@ -395,10 +401,19 @@
 
         resetToRoot();
 
-        function resetToRoot()
+        function resetToRoot(transition)
         {
-            console.log("RESETTING");
+            /*console.log("RESETTING");
+             //console.log(transition.selectAll(".node node--leaf"));
+             console.log(d3.selectAll(".node"));
+             //.filter(function(d) { return d.parent === focus || this.style.display === "inline" || d === focus; })
+             d3.selectAll(".node").style("display", function(d) {  return "none"; })*/
         }
+
+
+        //console.log(root);
+
+        console.log(d3.selectAll("circle"));
 
         function zoom(d) {
             //console.log(d); //d is the circle you clicked on (zoom level)
@@ -424,24 +439,61 @@
                         });
 
                 /* CONTROLS WHAT GETS SEEN AT WHAT ZOOM LEVEL*/
-                //transition.selectAll("circle")
-                //.filter(function(d) { return d.parent === focus || this.style.display === "inline" || d === focus; })
-                //.style("display", function(d) { return (d) ? "inline" : "none"; });
-                // .style("stroke", function(d) {  return (d || d.parent) ? "green" : "red"; })
-                // //.style("fill-opacity", function(d) { return (d.parent === focus) ? 1 : 0; })
-                //.each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-                //.each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+                /*transition.selectAll("circle")
+                 .filter(function(d) { return d.parent === focus || this.style.display === "inline" || d === focus; })
+                 .style("display", function(d) { return (d) ? "inline" : "none"; });
+                 // .style("stroke", function(d) {  return (d || d.parent) ? "green" : "red"; })
+                 .style("fill-opacity", function(d) { return (d.parent === focus) ? 1 : 0; })
+                 .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+                 .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });*/
 
-                transition.selectAll(".tweet, .handle")
+
+
+
+                transition.selectAll(".tweet, .handle, circle") //show objects at the level you are zoomed to
                     //.filter(function(d) { return d.parent === focus })
-                        .style("display", function(d) { return (d.parent === focus) ? "inline" : "none"; })
+                        .style("display", function(d) { return (d.parent === focus) ? "inline" : "none"; });
+
+                transition.selectAll("circle") //don't show leaves at first level influencers
+                        .style("display", function(d) {
+                            if ((focus===root) && (d.parent != root))
+                            {
+                                return "none";
+                            }  });
+
+                //always show root
+                /*transition.selectAll("circle") //don't show leaves at first level influencers
+                 .style("display", function(d) {
+                 if (d.parent)
+                 {
+                 return "inline";
+                 }
+                 return "none";
+                 });*/
+
+
+                /*transition.selectAll("circle")
+                 .style("display", function(d) { return (d.parent === focus) ? "inline" : "none"; });*/
+
+                /*transition.selectAll("circle")
+                 //.filter(function(d) { return d.parent === focus || this.style.display === "inline" || d === focus; })
+                 .style("display", function(d) {  return (d || d.parent) ? "inline" : "none"; })*/
+
+                /*transition.selectAll("text, circle")
+                 //.filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+                 .style("display", function(d) {  return (d.parent === focus || d === focus || d) ? "inline" : "none"; })
+                 .style("fill-opacity", function(d) { return (d.parent === focus) ? 1 : 0; })
+                 .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+                 .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });*/
 
 
                 //CODE ADAPTED FROM: Circle packing, zoomable circles, wrap function,
 
                 if (focus===root) //OR focus0 != root
                 {
-                    resetToRoot();
+
+                    console.log(transition.selectAll(".node"));
+                    //resetToRoot(transition);
                 }
 
             }
@@ -472,6 +524,9 @@
 
             circle.attr("r", function(d) { return d.r * k; });
         }
+
+        //zoom(root);
+
     });
 
     d3.select(self.frameElement).style("height", diameter + "px");
