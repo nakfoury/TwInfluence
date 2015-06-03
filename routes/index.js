@@ -98,7 +98,7 @@ router.post('/hashtag', function(req, res) {
     }
     result.name = query;
     buildJSON(query);
-    setTimeout(res.redirect('result.html'), 3000);
+    setTimeout(function(){res.redirect('result.html');}, 4000);
 });
 
 router.post('/again', function(req, res) {
@@ -179,7 +179,7 @@ router.post('/again', function(req, res) {
     }
     result.name = query;
     buildJSON(query);
-    setTimeout(res.redirect('result.html'), 3000);
+    setTimeout(function(){res.redirect('result.html');}, 4000);
 });
 
 var buildJSON = function(query) {
@@ -225,7 +225,7 @@ var buildJSON = function(query) {
                                 retweeters.sort(function (a, b) {
                                     return (b.followerNo - a.followerNo);
                                 });
-                                for (var n = 0; (n < Math.floor(retweeters.length / 5)); n++) {
+                                for (var n = 0; n <Math.floor(retweeters.length / 10); n++) {
                                     result.children[k].children[n] = retweeters[n];
                                 }
                             });
