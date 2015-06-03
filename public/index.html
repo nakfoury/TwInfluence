@@ -21,13 +21,17 @@
         @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
 
         body {
-            /*background-image:url("Twitter_logo_blue.png");*/
-            background-size: cover;
+            background: -webkit-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* Chrome 10+, Saf5.1+ */
+            background:    -moz-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* FF3.6+ */
+            background:     -ms-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* IE10 */
+            background:      -o-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* Opera 11.10+ */
+            background:         linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* W3C */
             width: 100%;
             top: 0;
             left: 0;
             bottom: 0;
             font-family: Lato;
+            color:white;
         }
 
         h1 {
@@ -35,6 +39,7 @@
             font-size: 8em;
             font-family: Righteous;
             margin: 8% auto 2% auto;
+
         }
 
         em {
@@ -83,7 +88,7 @@
         .btn-primary {
             background-color: #36c936;
             border-color: #57d757;
-            width: 2em;
+            width: 2.2em;
             height: 2em;
             border-radius:20px;
         }
@@ -114,7 +119,7 @@
         #share-button, img {
             margin-top:30px;
             max-width:50px;
-            max-height:auto;
+            max-height:50px;
             display:inline;
         }
 
@@ -157,7 +162,7 @@
             <input type="text"  name="querytext" id="search" class="form-control" placeholder="# Type Hashtag!" />
         </div>
         <div class="form-group">
-            <input type="submit" value="Go!" class="btn btn-primary">
+            <input type="submit" value="Go" class="btn btn-primary">
         </div>
     </form>
 </div>
