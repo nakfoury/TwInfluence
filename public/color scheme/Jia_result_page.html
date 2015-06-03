@@ -9,6 +9,14 @@
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
 
+        body {
+            background: -webkit-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Chrome 10+, Saf5.1+ */
+            background:    -moz-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* FF3.6+ */
+            background:     -ms-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* IE10 */
+            background:      -o-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Opera 11.10+ */
+            background:         linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* W3C */
+        }
+
         h1 {
             text-align: center;
             font-size: 5em;
@@ -111,26 +119,26 @@
 
         .node {
             cursor: pointer;
-            fill-opacity: 0.6;
-            stroke: #079107;
-            stroke-width: 0.5em;
+            fill-opacity: 0.8;
+            /*stroke: #079107;
+            stroke-width: 0.5em;*/
         }
 
         .node--root {
             fill: #57d757;
-            fill-opacity: 1;
+            fill-opacity: .7;
             stroke: transparent;
         }
 
         .node--leaf {
-            fill-opacity: 1;
-            stroke: #84e684;
-            stroke-width: 0.2em;
+            fill-opacity: .5;
+            stroke: #d3d3d3;
+            stroke-width: 0.01em;
         }
 
         .node:hover {
-            stroke: #079107;
-            stroke-width: 0.8em;
+            /*stroke: #079107;
+            stroke-width: 0.8em;*/
             fill-opacity: 1;
         }
 
@@ -138,11 +146,11 @@
             pointer-events: none;
         }
 
-        /*.node--leaf:hover {
-          stroke: #84e684;
-          stroke-width: 0.2em;
+        .node--leaf:hover {
+          stroke: #fff;
+          stroke-width: 0.1em;
           fill-opacity: 1;
-        }*/
+        }
 
         text {
             fill: white;
