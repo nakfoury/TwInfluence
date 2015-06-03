@@ -17,7 +17,7 @@ var T = new Twit({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.send('index.html');
+    res.redirect('result.html');
 });
 
 router.post('/hashtag', function(req, res) {
@@ -97,16 +97,8 @@ router.post('/hashtag', function(req, res) {
         query = "#".concat(query);
     }
     result.name = query;
-    var m = 0;
-    buildJSON(query, m);
-    //while(true) {
-    //    if (m >=25) {
-    //        console.log(m);
-    //        break;
-    //    }
-    //}
-    console.log(m);
-    res.redirect('result.html');
+    buildJSON(query);
+    setTimeout(res.redirect('result.html'), 3000);
 });
 
 router.post('/again', function(req, res) {
@@ -190,7 +182,7 @@ router.post('/again', function(req, res) {
     setTimeout(res.redirect('result.html'), 3000);
 });
 
-var buildJSON = function(query, m) {
+var buildJSON = function(query) {
     T.get('search/tweets', {q: query, lang: 'en', count: 5, result_type: "popular"}, function (err, data, response) {
         if (err) {
             console.log(err);
@@ -216,7 +208,6 @@ var buildJSON = function(query, m) {
                     var dict = [];
                     var j = 0;
                     var k = i;
-                    retweeters = [];
 
                     T.get('users/lookup', { user_id:RTIDs, include_entities:false }, function(err, data3, response) {
                         if (err) {
@@ -224,6 +215,7 @@ var buildJSON = function(query, m) {
                             console.log("at retweeter lookup (users/lookup)");
                         }
                         else {
+                            retweeters = [];
                             data3.forEach(function (user) {
                                 retweeters.push({
                                     "name": "@".concat(user.screen_name),
@@ -233,12 +225,11 @@ var buildJSON = function(query, m) {
                                 retweeters.sort(function (a, b) {
                                     return (b.followerNo - a.followerNo);
                                 });
-                                for (var n = 0; (n < retweeters.length) && (n < 5); n++) {
+                                for (var n = 0; (n < Math.floor(retweeters.length / 5)); n++) {
                                     result.children[k].children[n] = retweeters[n];
                                 }
                             });
                             j++;
-                            m++;
                             jf.writeFileSync("public/twitter_data.json", result);
                         }
                     });
