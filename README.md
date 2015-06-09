@@ -27,7 +27,7 @@ from the same directory. Press Control-C to stop the server.
 -[routes/index.js](https://github.com/nakfoury/TwInfluence/blob/master/routes/index.js): Express router that handles page requests, Twitter API OAuth, and queries to the Twitter API.  
 ## Credits
 #### Code Referenced  
-[Wrapping Long Labels](http://bl.ocks.org/mbostock/7555321)
+[Wrapping Long Labels](http://bl.ocks.org/mbostock/7555321)  
 [Zoomable Circle Packing](http://bl.ocks.org/mbostock/7607535)
 #### Packages Used  
 Node.js  
