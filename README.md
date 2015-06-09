@@ -4,11 +4,11 @@
 ## Usage
 \#Influence is currently deployed on Amazon Elastic Compute Cloud. It can be accessed [here](http://52.24.28.184).  
   
-  To use \#Influence, enter a popular hashtag into the search bar and press the "Go!" button. After a brief moment, you will be redirected to a result page bearing a stunning visualization of the top 5 most popular tweets with that hashtag. Clicking on any of them will reveal the top retweeters of that tweet, selected and sized by follower number.
+  To use \#Influence, enter a popular hashtag into the search bar and press the "Go!" button. After a brief moment, you will be redirected to a result page bearing a stunning visualization of the top 5 most popular tweets with that hashtag. Clicking on any of them will reveal the top retweeters of that tweet, selected and sized by relative number of followers.
 
 
 ## Future Work
-Should you want to continue developing #Influence, here are some instructions to guide you:
+Should you want to continue developing #Influence, here is some information to guide you:
 #### Download and Installation
   1. Download the [source code](https://github.com/nakfoury/TwInfluence/archive/master.zip).  
   2. Extract the code to your desired directory.  
@@ -28,9 +28,10 @@ from the same directory. Press Control-C to stop the server.
 - [routes/index.js](https://github.com/nakfoury/TwInfluence/blob/master/routes/index.js): Express router that handles page requests, Twitter API OAuth, and queries to the Twitter API.  
 
 #### Known Issues/Missing Features
-- \#Influence currently supports only 1 user at a time due to resource sharing. To allow multiple simultaneous users, Twitter data would need to be returned to the frontend as an Express response. It would need to be added to result.js, perhaps using [Angluar.js](https://angularjs.org/).  
+- \#Influence currently supports only 1 user at a time due to resource contention over the twitter_data.json file. To support multiple simultaneous users, Twitter data would need to be returned to the frontend as a response from the Express router. It would need to be added to result.js, perhaps using [Angluar.js](https://angularjs.org/).  
 - The backend currently calls multiple queries to the Twitter API iteratively, causing the termination of all callbacks to complete at an indeterminate time. The current solution is to wait a fixed amount of time before redirecting the page. A better solution would be to call the Twitter queries in order, recursively.  
 - \#Influence could be more more useful by displaying more information about each Twitter user. It could derive this information by parsing Twitter account descriptions and classifying users by their predicted areas of expertise.  
+- The current visualization packs retweeter circles into the entire tweet circle (upon clicking to expand a tweet). A more intuitive display might pack retweeter circles into the lower portion of the original tweet circle, reserving the upper portion for information about the original tweet/tweeter and links to relevant pages on Twitter. One solution in development involves packing the retweeter circles into a zoomable rectangular canvas contained in the lower portions of the original tweet circles.
 
 ## Credits
 #### Code Referenced  
