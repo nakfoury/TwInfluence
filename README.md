@@ -25,16 +25,21 @@ from the same directory. Press Control-C to stop the server.
 -[public/javascripts/](https://github.com/nakfoury/TwInfluence/tree/master/public/javascripts): Currently contains JavaScript for D3.js visualization. Add new JavaScripts here.  
 -[public/stylesheets/](https://github.com/nakfoury/TwInfluence/tree/master/public/javascripts): Currently contains CSS for index.html and result.html. Add new StyleSheets here.  -[bin/www](https://github.com/nakfoury/TwInfluence/blob/master/bin/www): Run this file with node to open an HTTP server on port 3000.  
 -[routes/index.js](https://github.com/nakfoury/TwInfluence/blob/master/routes/index.js): Express router that handles page requests, Twitter API OAuth, and queries to the Twitter API.  
+
+#### Known Issues/Missing Features
+-\#Influence currently supports only 1 user at a time due to resource sharing. To allow multiple simultaneous users, Twitter data would need to be returned to the frontend as an Express response. It would need to be added to result.js, perhaps using [Angluar.js](https://angularjs.org/).  
+-The backend currently calls multiple queries to the Twitter API iteratively, causing the termination of all callbacks to complete at an indeterminate time. The current solution is to wait a fixed amount of time before redirecting the page. A better solution would be to call the Twitter queries in order, recursively.  
+-\#Influence could be more more useful by displaying more information about each Twitter user. It could derive this information by parsing Twitter account descriptions and 
 ## Credits
 #### Code Referenced  
 [Wrapping Long Labels](http://bl.ocks.org/mbostock/7555321)  
 [Zoomable Circle Packing](http://bl.ocks.org/mbostock/7607535)
 #### Packages Used  
-Node.js  
-Express  
-D3.js  
-twit  
-jsonfile  
+[Node.js](https://nodejs.org/)  
+[Express](http://expressjs.com/)  
+[D3.js](http://d3js.org/)  
+[twit](https://github.com/ttezel/twit)  
+[jsonfile](https://www.npmjs.com/package/jsonfile)  
 ## About
 Authors: Neal Kfoury, Neha Rathi, Yasu Saito, Jia You  
 Northwestern University  
