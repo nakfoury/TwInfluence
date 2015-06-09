@@ -3,7 +3,8 @@
 
 ## Usage
 \#Influence is currently deployed on Amazon Elastic Compute Cloud. It can be accessed [here](http://52.24.28.184).  
-To use \#Influence, enter a popular hashtag into the search bar and press the "Go!" button. After a brief moment, you will be redirected to a result page bearing a stunning visualization of the top 5 most popular tweets with that hashtag. Clicking on any of them will reveal the top retweeters of that tweet, selected and sized by follower number.
+  
+  To use \#Influence, enter a popular hashtag into the search bar and press the "Go!" button. After a brief moment, you will be redirected to a result page bearing a stunning visualization of the top 5 most popular tweets with that hashtag. Clicking on any of them will reveal the top retweeters of that tweet, selected and sized by follower number.
 
 
 ## Future Work
