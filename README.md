@@ -30,7 +30,8 @@ from the same directory. Press Control-C to stop the server.
 #### Known Issues/Missing Features
 - \#Influence currently supports only 1 user at a time due to resource sharing. To allow multiple simultaneous users, Twitter data would need to be returned to the frontend as an Express response. It would need to be added to result.js, perhaps using [Angluar.js](https://angularjs.org/).  
 - The backend currently calls multiple queries to the Twitter API iteratively, causing the termination of all callbacks to complete at an indeterminate time. The current solution is to wait a fixed amount of time before redirecting the page. A better solution would be to call the Twitter queries in order, recursively.  
-- \#Influence could be more more useful by displaying more information about each Twitter user. It could derive this information by parsing Twitter account descriptions and classifying users by their predicted areas of expertise.
+- \#Influence could be more more useful by displaying more information about each Twitter user. It could derive this information by parsing Twitter account descriptions and classifying users by their predicted areas of expertise.  
+
 ## Credits
 #### Code Referenced  
 [Wrapping Long Labels](http://bl.ocks.org/mbostock/7555321)  
