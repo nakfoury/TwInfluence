@@ -1,5 +1,5 @@
 # \#Influence
-\#Influence is a web app for visualizing major influencers on Twitter. Users may enter a hashtag query to generate models of popular tweets with that hashtag.
+\#Influence is a web app for visualizing major influencers on Twitter. Users may enter a hashtag query to generate models of popular tweets with that hashtag. Read more about \#Influence on [Medium](https://medium.com/@jiayoumedill/70c3dc0bcd65).
 
 ## Usage
 \#Influence is currently deployed on Amazon Elastic Compute Cloud. It can be accessed [here](http://52.24.28.184).  
