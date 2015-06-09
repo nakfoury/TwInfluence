@@ -233,7 +233,7 @@ var buildJSON = function(query) {
                                 }
                             });
                             j++;
-                            jf.writeFileSync("public/twitter_data.json", result); // May need to be modified for deployment
+                            jf.writeFileSync("/home/ec2-user/TwInfluence/public/twitter_data.json", result); // May need to be modified for deployment
                         }
                     });
                 }
