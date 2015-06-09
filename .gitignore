@@ -1,3 +1,4 @@
 node_modules
 bower_components
 .idea
+public/twitter_data.json
