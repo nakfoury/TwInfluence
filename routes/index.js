@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
     res.redirect('result.html');
 });
 
+/* POST from index.html */
 router.post('/hashtag', function(req, res) {
     result = {
         "name": "hashtag",
@@ -90,7 +91,7 @@ router.post('/hashtag', function(req, res) {
             ]
         }
     ]
-    };
+    }; //Result JSON template
     var query = req.body['querytext'];
     var hashtag = /#/i;
     if (query.search(hashtag) != 0) {
@@ -101,6 +102,7 @@ router.post('/hashtag', function(req, res) {
     setTimeout(function(){res.redirect('result.html');}, 4000);
 });
 
+/* POST from result.html */
 router.post('/again', function(req, res) {
     result = {
         "name": "hashtag",
@@ -171,7 +173,7 @@ router.post('/again', function(req, res) {
                 ]
             }
         ]
-    };
+    }; //Result JSON template
     var query = req.body['querytext'];
     var hashtag = /#/i;
     if (query.search(hashtag) != 0) {
@@ -182,6 +184,7 @@ router.post('/again', function(req, res) {
     setTimeout(function(){res.redirect('result.html');}, 4000);
 });
 
+/* Writes new Twitter data to twitter_data.json */
 var buildJSON = function(query) {
     T.get('search/tweets', {q: query, lang: 'en', count: 5, result_type: "popular"}, function (err, data, response) {
         if (err) {
