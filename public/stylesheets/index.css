@@ -1,0 +1,129 @@
+
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous|Abril+Fatface);
+
+body {
+    background: -webkit-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* Chrome 10+, Saf5.1+ */
+    background:    -moz-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* FF3.6+ */
+    background:     -ms-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* IE10 */
+    background:      -o-linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* Opera 11.10+ */
+    background:         linear-gradient(90deg, #5ca572 10%, #77c3db 90%); /* W3C */
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    font-family: Lato;
+    color:white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 8em;
+    font-family: Righteous;
+    margin: 8% auto 2% auto;
+
+}
+
+em {
+    color: #fb4444;
+    font-style: normal;
+    font-size:150%;
+    font-family:"Lato";
+    font-weight:900;
+}
+
+h1 em {
+    margin-top: 0;
+    padding-top: 0;
+    line-height: 0.5em;
+}
+
+h2 {
+    font-weight: 700;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+h3 {
+    font-weight: 300;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.form-group {
+    position: relative;
+    margin: 2% auto 0 auto;
+}
+
+.form-group input {
+    font-family: Lato;
+    font-size: 3em;
+}
+
+.form-control {
+    height: 2em;
+    border: 3px solid #57d757;
+    border-radius:20px;
+    padding: 0 1em 0 1em;
+}
+
+.btn-primary {
+    background-color: #36c936;
+    border-color: #57d757;
+    width: 2.2em;
+    height: 2em;
+    border-radius:20px;
+}
+
+.btn-primary:hover {
+    background-color: #079107;
+    border-color: #36c936;
+}
+
+#search {
+    border-color: #36c936;
+}
+
+ul.share-buttons{
+    list-style: none;
+    padding: 0;
+}
+
+ul.share-buttons li{
+    display: inline;
+}
+
+#share-button {
+    margin:80px auto 0 auto;
+    text-align: center;
+}
+
+#share-button, img {
+    margin-top:30px;
+    max-width:50px;
+    max-height:50px;
+    display:inline;
+}
+
+/* .navbar-brand {
+    font-family: Righteous;
+    font-size: 1.5em;
+    margin-left: 20px;
+} */
+@media screen and (max-width:750px) {
+    h1 {
+        text-align: center;
+        font-size: 5em;
+        font-family: "Lato", selif;
+        font-weight: 900;
+        margin: 50px auto 0 auto;
+    }
+
+    h2, h3 {
+        font-size:1.8em;
+    }
+    #share-button {
+        margin:20px auto 0 auto;
+        text-align: center;
+    }
+}
