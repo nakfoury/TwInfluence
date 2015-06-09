@@ -35,8 +35,16 @@ from the same directory. Press Control-C to stop the server.
 
 ## Credits
 #### Code Referenced  
+##### From mbostock
 [Wrapping Long Labels](http://bl.ocks.org/mbostock/7555321)  
-[Zoomable Circle Packing](http://bl.ocks.org/mbostock/7607535)
+[Zoomable Circle Packing](http://bl.ocks.org/mbostock/7607535)  
+[Circle Packing in a Rectangle](http://bl.ocks.org/seliopou/4127259)  
+[Labeled Force Layout](http://bl.ocks.org/mbostock/950642)  
+[Donut Multiples](http://bl.ocks.org/mbostock/3888852)  
+[Pie Multiples](http://bl.ocks.org/mbostock/1305111)  
+##### From Dashing D3.js
+[SVG Group Elements and D3.js](https://www.dashingd3js.com/svg-group-element-and-d3js)  
+
 #### Packages Used  
 [Node.js](https://nodejs.org/)  
 [Express](http://expressjs.com/)  
